@@ -1,0 +1,112 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+@use "responsive" as rs;
+
+.article {
+    p,
+    li {
+        @include tg.body;
+    }
+
+    p,
+    ul {
+        @include rs.responsiveProperty("margin-block-end", fn.spacing(1), fn.spacing(2));
+
+        & + .article__heading,
+        & + h2,
+        & + .article__subheading,
+        & + h3 {
+            @include rs.responsiveProperty("padding-block-start", fn.spacing(0.5), fn.spacing(1.5));
+        }
+    }
+
+    li {
+        position: relative;
+        padding-inline-start: 1em;
+        @include rs.responsiveProperty("margin-block-end", fn.spacing(0.5), fn.spacing(1));
+
+        &:before {
+            content: "\2022";
+            font-size: 0.67em;
+            position: absolute;
+            inset-inline-start: 0;
+            inset-block-start: -0.2em;
+
+            @include rs.mqMedium {
+                inset-block-start: -0.1em;
+            }
+        }
+
+        ul {
+            @include rs.responsiveProperty("padding-block-start", fn.spacing(0.5), fn.spacing(1));
+        }
+
+        li:before {
+            content: "\25e6";
+            font-size: 1.4em;
+            inset-block-start: 0.05em;
+        }
+    }
+
+    figure {
+        display: flex;
+        flex-direction: column;
+        margin-block-start: fn.spacing(1);
+    }
+
+    img {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .caption {
+        @include tg.fontSizeAndLineHeight(
+            $minFontSizeStep: map.get(tg.$defaultFontSizes, "caption", "min"),
+            $maxFontSizeStep: map.get(tg.$defaultFontSizes, "caption", "max"),
+            $tightLineHeight: true
+        );
+        color: map.get(var.$roGrays, 6);
+        margin-block-start: fn.spacing(1);
+    }
+}
+
+.article__title,
+.markdown h1 {
+    @include tg.title;
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(2), fn.spacing(3.5));
+}
+
+.article__intro {
+    &,
+    p {
+        @include tg.intro;
+        @include rs.responsiveProperty("margin-block-end", fn.spacing(3), fn.spacing(5));
+    }
+}
+
+.article__heading,
+.markdown h2 {
+    @include tg.heading;
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(2), fn.spacing(2.5));
+}
+
+.article__subheading,
+.markdown h3 {
+    @include tg.subHeading;
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(2), fn.spacing(2.5));
+
+    li & {
+        margin-block-end: 0;
+    }
+}
+
+.article__image {
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(2), fn.spacing(2.5));
+
+    & + .article__heading,
+    & + .article__subheading {
+        @include rs.responsiveProperty("padding-block-start", fn.spacing(0.5), fn.spacing(1.5));
+    }
+}

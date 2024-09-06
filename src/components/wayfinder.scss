@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+@use "responsive" as rs;
+@use "icons" as ic;
+
+.wayfinder {
+    column-width: 270px;
+    column-gap: fn.spacing(4);
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(2), fn.spacing(4));
+}
+
+.wayfinder__item {
+    $color: map.get(var.$roColors, "skyBlue");
+    $hoverColor: fn.getHoverColor($color, "dark");
+    $icon: "chevronRight";
+
+    @include tg.fontSizeAndLineHeight(
+        $minFontSizeStep: map.get(tg.$defaultFontSizes, "body", "min"),
+        $maxFontSizeStep: map.get(tg.$defaultFontSizes, "body", "max"),
+        $tightLineHeight: true
+    );
+    position: relative;
+    display: block;
+    text-decoration: none;
+    padding-inline-start: 1em;
+    @include rs.responsiveProperty("margin-block-end", fn.spacing(0.5), fn.spacing(1));
+
+    &:before {
+        $size: 0.68em;
+        display: inline-block;
+        content: "";
+        width: $size;
+        height: $size;
+        background-image: url(ic.getIcon($icon: $icon, $color: $color));
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0.3em;
+        @include tg.fontSmoothing;
+
+        @include rs.mqMedium {
+            inset-block-start: 0.25em;
+        }
+    }
+
+    &,
+    &:visited {
+        color: $color;
+    }
+
+    &:hover {
+        color: $hoverColor;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+
+        &:before {
+            background-image: url(ic.getIcon($icon: $icon, $color: $hoverColor));
+        }
+    }
+
+    .wayfinder--on-gray-background & {
+        $color: map.get(var.$roColors, "darkBlue");
+        $hoverColor: fn.getHoverColor($color, "dark");
+        $icon: "chevronRight";
+
+        &:before {
+            background-image: url(ic.getIcon($icon: $icon, $color: $color));
+        }
+
+        &,
+        &:visited {
+            color: $color;
+        }
+
+        &:hover {
+            color: $hoverColor;
+
+            &:before {
+                background-image: url(ic.getIcon($icon: $icon, $color: $hoverColor));
+            }
+        }
+    }
+}

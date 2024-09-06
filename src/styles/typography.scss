@@ -1,0 +1,123 @@
+@use "sass:math";
+@use "sass:map";
+@use "variables" as vars;
+@use "functions" as fn;
+@use "responsive" as rs;
+
+$modularScale: (
+    -2: 12.64px,
+    -1: 14.22px,
+    0: 16px,
+    1: 18px,
+    2: 20.25px,
+    3: 22.78px,
+    4: 25.63px,
+    5: 28.83px,
+    6: 32.44px,
+    7: 36.49px,
+    8: 41.05px,
+    9: 46.18px
+);
+
+$defaultFontSizes: (
+    title: (
+        min: 4,
+        max: 6
+    ),
+    intro: (
+        min: 2,
+        max: 4
+    ),
+    body: (
+        min: 1,
+        max: 2
+    ),
+    heading: (
+        min: 3,
+        max: 5
+    ),
+    subHeading: (
+        min: 1,
+        max: 3
+    ),
+    caption: (
+        min: 0,
+        max: 1
+    )
+);
+
+@mixin fontSizeAndLineHeight(
+    $minFontSizeStep,
+    $maxFontSizeStep: $minFontSizeStep,
+    $tightLineHeight: false,
+    $responsive: true
+) {
+    $minFontSize: map.get($modularScale, $minFontSizeStep);
+    $maxFontSize: map.get($modularScale, $maxFontSizeStep);
+    $lineHeightStartingPoint: if($tightLineHeight, vars.$baseTightLineHeight, vars.$baseLineHeight);
+    $adjustmentFactor: 1.8;
+
+    @if $responsive {
+        font-size: clamp(
+            #{$minFontSize},
+            #{fn.pxToVw($maxFontSize, rs.$defaultTextColumnBreakpoint, $decimals: 2)},
+            #{$maxFontSize}
+        );
+        line-height: calc((#{$lineHeightStartingPoint} * 1em) - ((1em - 1rem) / #{$adjustmentFactor}));
+    } @else {
+        font-size: $minFontSize;
+        line-height: fn.decimalRound(
+            ($lineHeightStartingPoint * $minFontSize) - math.div($minFontSize - vars.$baseFontSize, $adjustmentFactor),
+            2
+        );
+    }
+}
+
+@mixin title {
+    @include fontSizeAndLineHeight(
+        $minFontSizeStep: map.get($defaultFontSizes, "title", "min"),
+        $maxFontSizeStep: map.get($defaultFontSizes, "title", "max"),
+        $tightLineHeight: true
+    );
+    font-weight: bold;
+}
+
+@mixin heading {
+    @include fontSizeAndLineHeight(
+        $minFontSizeStep: map.get($defaultFontSizes, "heading", "min"),
+        $maxFontSizeStep: map.get($defaultFontSizes, "heading", "max"),
+        $tightLineHeight: true
+    );
+    font-weight: bold;
+}
+
+@mixin subHeading {
+    @include fontSizeAndLineHeight(
+        $minFontSizeStep: map.get($defaultFontSizes, "subHeading", "min"),
+        $maxFontSizeStep: map.get($defaultFontSizes, "subHeading", "max"),
+        $tightLineHeight: true
+    );
+    font-weight: bold;
+}
+
+@mixin intro {
+    @include fontSizeAndLineHeight(
+        $minFontSizeStep: map.get($defaultFontSizes, "intro", "min"),
+        $maxFontSizeStep: map.get($defaultFontSizes, "intro", "max")
+    );
+    font-weight: normal;
+}
+
+@mixin body {
+    @include fontSizeAndLineHeight(
+        $minFontSizeStep: map.get($defaultFontSizes, "body", "min"),
+        $maxFontSizeStep: map.get($defaultFontSizes, "body", "max")
+    );
+    font-weight: normal;
+}
+
+@mixin fontSmoothing {
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,19 @@
+#ignore fonts, svgs and data
+*.woff2
+*.svg
+*.csv
+*.ods
+*.xlsx
+*.env
+*.png
+
+#ignore env
+.env.cms
+Jenkinsfile
+
+#ignore the ignores
+*.editorconfig
+*.eslintignore
+*.prettierignore
+*.gitignore
+*.yaml

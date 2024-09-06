@@ -1,0 +1,8 @@
+@use "functions" as fn;
+@use "responsive" as rs;
+
+.external-data {
+    .rhs-color-overview {
+        @include rs.responsiveProperty("padding-block-start", fn.spacing(2), fn.spacing(3));
+    }
+}

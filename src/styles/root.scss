@@ -1,0 +1,36 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+
+.web-app {
+    box-sizing: border-box;
+    font-family: var.$roSansFontFamily;
+    @include tg.body;
+    color: var.$defaultTextColor;
+
+    * {
+        &,
+        &:before,
+        &:after {
+            box-sizing: border-box;
+        }
+    }
+}
+
+a {
+    $color: map.get(var.$roColors, "skyBlue");
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+
+    &,
+    &:visited {
+        color: $color;
+    }
+
+    &:hover {
+        color: fn.getHoverColor($color, "dark");
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "roColors": [
+        { "name": "purple", "dutchName": "Paars", "hex": "#42145f" },
+        { "name": "violet", "dutchName": "Violet", "hex": "#a90061" },
+        { "name": "red", "dutchName": "Rood", "hex": "#d52b1e" },
+        { "name": "rubyRed", "dutchName": "Robijnrood", "hex": "#ca005d" },
+        { "name": "pink", "dutchName": "Roze", "hex": "#f092cd" },
+        { "name": "orange", "dutchName": "Oranje", "hex": "#e17000" },
+        { "name": "yellow", "dutchName": "Geel", "hex": "#f9e11e" },
+        { "name": "darkYellow", "dutchName": "Donkergeel", "hex": "#ffb612" },
+        { "name": "brown", "dutchName": "Bruin", "hex": "#94710a" },
+        { "name": "darkBrown", "dutchName": "Donkerbruin", "hex": "#673327" },
+        { "name": "green", "dutchName": "Groen", "hex": "#39870c" },
+        { "name": "darkGreen", "dutchName": "Donkergroen", "hex": "#275937" },
+        { "name": "mintGreen", "dutchName": "Mintgroen", "hex": "#76d2b6" },
+        { "name": "mossGreen", "dutchName": "Mosgroen", "hex": "#777b00" },
+        { "name": "darkBlue", "dutchName": "Donkerblauw", "hex": "#01689b" },
+        { "name": "skyBlue", "dutchName": "Hemelblauw", "hex": "#007bc7" },
+        { "name": "lightBlue", "dutchName": "Lichtblauw", "hex": "#8fcae7" }
+    ]
+}

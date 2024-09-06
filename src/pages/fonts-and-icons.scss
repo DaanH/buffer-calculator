@@ -1,0 +1,8 @@
+@use "functions" as fn;
+@use "responsive" as rs;
+
+.fonts-and-icons {
+    .icons-overview {
+        @include rs.responsiveProperty("padding-block-start", fn.spacing(2), fn.spacing(3));
+    }
+}

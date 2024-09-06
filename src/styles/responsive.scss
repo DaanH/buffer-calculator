@@ -1,0 +1,149 @@
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+@use "variables" as vars;
+@use "functions" as fn;
+
+$breakpoints: (
+    extraSmall: 480px,
+    small: 576px,
+    medium: 768px,
+    large: 992px,
+    extraLarge: 1200px
+);
+
+$defaultTextColumnBreakpoint: 800px;
+
+/*
+Mixins to make usage of the available breakpoints easier / more concise.
+Instead of having to write
+    @media (min-width: map.get($breakpoints, small)) {
+        property: value;
+    }
+you can now use
+    @include mq.mqSmall {
+        property: value;
+    }
+Unless otherwise explicitly specified these mixins are written from a 
+    'mobile first' perspective, i.e. 'mqSmall' means 'from breakpoint 
+    "small" (= 576px) and up'.  
+The full set of breakpoints can be found in abstracts/_variables.scss 
+*/
+
+@mixin mqExtraSmall {
+    @media (min-width: map.get($breakpoints, extraSmall)) {
+        @content;
+    }
+}
+
+@mixin mqSmall {
+    @media (min-width: map.get($breakpoints, small)) {
+        @content;
+    }
+}
+
+@mixin mqMedium {
+    @media (min-width: map.get($breakpoints, medium)) {
+        @content;
+    }
+}
+
+@mixin mqLarge {
+    @media (min-width: map.get($breakpoints, large)) {
+        @content;
+    }
+}
+
+@mixin mqExtraLarge {
+    @media (min-width: map.get($breakpoints, extraLarge)) {
+        @content;
+    }
+}
+
+@mixin mqUntilExtraSmall {
+    $maxWidth: map.get($breakpoints, extraSmall) - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqUntilSmall {
+    $maxWidth: map.get($breakpoints, small) - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqUntilMedium {
+    $maxWidth: map.get($breakpoints, medium) - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqUntilLarge {
+    $maxWidth: map.get($breakpoints, large) - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqUntilExtraLarge {
+    $maxWidth: map.get($breakpoints, extraLarge) - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqOnlyMedium {
+    $minWidth: map.get($breakpoints, medium);
+    $maxWidth: map.get($breakpoints, large) - 1;
+    @media (min-width: $minWidth) and (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin mqFrom($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin mqUntil($breakpoint) {
+    $maxWidth: $breakpoint - 1;
+    @media (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin responsiveProperty($property, $min, $max, $breakpoint: $defaultTextColumnBreakpoint, $negative: false) {
+    @if meta.type-of($min) == number and math.is-unitless($min) {
+        $minPx: fn.spacing($min);
+        $maxPx: fn.spacing($max);
+        @if $negative {
+            $min: fn.negative($minPx);
+            $max: fn.negative($maxPx);
+        } @else {
+            $min: $minPx;
+            $max: $maxPx;
+        }
+    } @else {
+        @if $negative {
+            $min: fn.negative($min);
+            $max: fn.negative($max);
+        } @else {
+            $min: $min;
+            $max: $max;
+        }
+    }
+
+    $viewport: fn.pxToVw($max, $breakpoint, $decimals: 2);
+
+    @if $negative {
+        $viewport: fn.negative($viewport);
+    } @else {
+        $viewport: $viewport;
+    }
+
+    #{$property}: clamp(#{$min}, #{$viewport}, #{$max});
+}

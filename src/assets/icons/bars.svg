@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="448" height="512" viewBox="0 0 448 512">
+  <g>
+    <polygon points="448 46 0 46 0 130 406 130 448 46" fill="currentColor"/>
+    <polygon points="0 298 406 298 448 214 0 214 0 298" fill="currentColor"/>
+    <polygon points="0 466 406 466 448 382 0 382 0 466" fill="currentColor"/>
+  </g>
+</svg>

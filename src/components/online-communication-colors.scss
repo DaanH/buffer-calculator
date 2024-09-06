@@ -1,0 +1,55 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+@use "responsive" as rs;
+
+.rhs-color-overview {
+    display: grid;
+    grid-auto-rows: min-content;
+    @include rs.responsiveProperty("gap", fn.spacing(4), fn.spacing(8));
+    font-family: var.$roSansFontFamily;
+}
+
+.rhs-color {
+    display: flex;
+    flex-wrap: wrap;
+    @include rs.responsiveProperty("gap", fn.spacing(3), fn.spacing(4));
+}
+
+.rhs-color__swatches-container {
+    flex: 10 0 222px;
+    display: grid;
+    grid-template: 88px / minmax(74px, 1fr) 74px 74px;
+    padding-block-start: 2px;
+}
+
+.rhs-color__info-container {
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: 4px;
+}
+
+.rhs-color__info {
+    flex: 1 0 0;
+    display: grid;
+    grid-template-columns: 118px 1fr;
+    @include tg.fontSizeAndLineHeight(
+        $minFontSizeStep: map.get(tg.$defaultFontSizes, "body", "min"),
+        $maxFontSizeStep: map.get(tg.$defaultFontSizes, "body", "max"),
+        $tightLineHeight: true
+    );
+}
+
+.rhs-color__values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rhs-color__hex-code {
+    width: 90px;
+}
+
+.rhs-color__name {
+    font-weight: bold;
+}

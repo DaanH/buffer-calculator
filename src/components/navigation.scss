@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+@use "responsive" as rs;
+@use "icons" as ic;
+
+.navigation {
+    background-color: map.get(var.$roGrays, 1);
+    @include rs.responsiveProperty("padding-block-start", fn.spacing(2), fn.spacing(5));
+    @include rs.responsiveProperty("padding-block-end", fn.spacing(1.5), fn.spacing(4.5));
+    @include rs.responsiveProperty("padding-inline", fn.spacing(2.5), fn.spacing(4));
+}

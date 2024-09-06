@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "variables" as var;
+@use "functions" as fn;
+@use "typography" as tg;
+@use "responsive" as rs;
+
+.icons-overview__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: fn.spacing(3);
+    row-gap: fn.spacing(3);
+
+    @include rs.mqSmall {
+        grid-template-columns: repeat(auto-fit, minmax(212px, 240px));
+        row-gap: fn.spacing(4);
+    }
+}
+
+.icon-swatch {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon__name {
+    @include tg.fontSizeAndLineHeight($minFontSizeStep: 1, $maxFontSizeStep: 2, $tightLineHeight: true);
+    font-weight: normal;
+    margin-block-end: fn.spacing(0.5);
+}
+
+.icon__button-container {
+    position: relative;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-block-end: fn.spacing(2);
+    }
+}
+
+.icon__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: map.get(var.$roGrays, 1);
+    color: var.$defaultTextColor;
+    padding: 12px;
+
+    img {
+        $size: 24px;
+        max-width: $size;
+        max-height: $size;
+    }
+}

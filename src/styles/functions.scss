@@ -1,0 +1,116 @@
+@use "sass:math";
+@use "sass:string";
+@use "sass:meta";
+@use "sass:color";
+@use "variables" as vars;
+
+// Simple helpers
+
+@function negative($value) {
+    @return $value * -1;
+}
+
+@function half($value) {
+    @return math.div($value, 2);
+}
+
+@function double($value) {
+    @return $value * 2;
+}
+
+// Borrowed from https://css-tricks.com/snippets/sass/strip-unit-function/
+
+@function stripUnit($number) {
+    @if meta.type-of($number) == "number" and not unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+@function pxToVw($target, $viewport, $decimals: 9) {
+    $vwContext: (stripUnit($viewport) * 0.01) * 1px;
+    @return decimalRound(math.div($target, $vwContext) * 1vw, $decimals);
+}
+
+// Borrowed from https://stackoverflow.com/questions/10369643/rounding-numbers-in-sass-and-adjusting-the-amount-of-decimals
+
+@function decimalRound($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if meta.type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if meta.type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @if $digits > 0 {
+        @for $i from 1 through $digits {
+            $n: $n * 10;
+        }
+    }
+    @if $mode == round {
+        @return math.div(round($number * $n), $n);
+    } @else if $mode == ceil {
+        @return math.div(ceil($number * $n), $n);
+    } @else if $mode == floor {
+        @return math.div(floor($number * $n), $n);
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}
+
+// Adapted from https://css-tricks.com/snippets/sass/str-replace-function/
+
+@function stringReplace($string, $search, $replace: "") {
+    $index: string.index($string, $search);
+
+    @if $index {
+        @return string.slice($string, 1, $index - 1) + $replace +
+            stringReplace(string.slice($string, $index + string.length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+// Check if number is integer
+@function isInteger($value) {
+    @if meta.type-of($value) !=number {
+        @warn '`#{$value}` is not a valid number!';
+        @return null;
+    } @else {
+        @if round($value) == $value {
+            @return true;
+        } @else {
+            @return false;
+        }
+    }
+}
+
+@function isAcceptableNumber($number) {
+    $withinNonIntegerRange: $number > -2 and $number < 7;
+    @if isInteger($number) or ($withinNonIntegerRange and isInteger(math.div($number, 0.5))) {
+        @return true;
+    }
+    @return false;
+}
+
+@function spacing($spacingStep) {
+    @if (isAcceptableNumber($spacingStep) == true) {
+        @return $spacingStep * vars.$gridBaseline;
+    } @else {
+        @error "#{$spacingStep} is not an acceptable number for the spacing function.";
+    }
+}
+
+@function getHoverColor($color, $type) {
+    $mixColor: if($type == "dark", #000, #fff);
+    @return color.mix($color, $mixColor, 70%);
+}

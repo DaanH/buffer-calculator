@@ -1,0 +1,60 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "react", "import"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:jsx-a11y/recommended"],
+    "rules": {
+        "react/react-in-jsx-scope": "off", // Suppress errors for missing 'import React' in files
+        "prettier/prettier": ["warn"], // Have prettier warn (not error) us about formatting issues
+        "linebreak-style": ["warn", "unix"], // Warn users to use LF, not CRLF
+        "no-console": [
+            "warn",
+            {
+                "allow": ["warn", "error", "info"]
+            }
+        ], // Warning users to remove console logs
+        "default-case": ["error"], // Warning users to have a default in a switch statement
+        "max-lines": "off", // Max lines per file turned off due to requirement of only one file per type
+        "react/prop-types": ["off"], // No need to have prop types, we're using Typescript for this,
+        "react/no-multi-comp": ["warn"], // Warn users to not have multiple components in a single file
+        "react/jsx-curly-brace-presence": [
+            "warn",
+            { "props": "never", "children": "never", "propElementValues": "always" }
+        ],
+        "import/order": [
+            "warn",
+            {
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "builtin",
+                        "position": "before"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["react"]
+            }
+        ],
+        "quotes": ["warn", "double"],
+        "@typescript-eslint/array-type": ["warn", { "default": "array" }],
+        "@typescript-eslint/no-namespace": "off",
+        "react/button-has-type": ["warn", { "button": true, "submit": true, "reset": true }],
+        "prefer-const": ["warn", { "destructuring": "any", "ignoreReadBeforeAssign": false }],
+        "import/prefer-default-export": ["warn", { "target": "single" }],
+        "no-duplicate-imports": ["warn"]
+    },
+    "env": {
+        "node": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "overrides": [
+        // Typescript files
+        {
+            "files": ["*.tsx", " *.ts"],
+            "extends": ["plugin:@typescript-eslint/recommended"]
+        }
+    ]
+}

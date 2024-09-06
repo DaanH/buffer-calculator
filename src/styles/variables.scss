@@ -1,0 +1,30 @@
+@use "sass:map";
+
+$gridBaseline: 8px;
+
+$baseFontSize: 16px;
+$baseLineHeight: 1.6;
+$baseTightLineHeight: 1.45;
+
+$roSansFontFamily: "RO Sans", Calibri, Arial, Verdana, sans-serif;
+$roSerifFontFamily: "RO Serif", Times, "Times New Roman", serif;
+$metaSansFontFamily: "Meta Sans", Calibri, Arial, Verdana, sans-serif;
+$metaSerifFontFamily: "Meta Serif", Times, "Times New Roman", serif;
+
+$roColors: (
+    "darkBlue": #01689b,
+    "skyBlue": #007bc7
+);
+
+$roGrays: (
+    1: #f3f3f3,
+    2: #e6e6e6,
+    3: #ccc,
+    4: #b4b4b4,
+    5: #999,
+    6: #696969,
+    7: #535353,
+    8: #222
+);
+
+$defaultTextColor: map.get($roGrays, 8);

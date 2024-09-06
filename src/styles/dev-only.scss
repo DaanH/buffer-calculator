@@ -1,0 +1,56 @@
+@use "sass:map";
+@use "sass:string";
+@use "variables" as var;
+@use "functions" as fn;
+@use "responsive" as rs;
+@use "typography" as tg;
+
+$fonts: ("RO Sans", "RO Serif", "Meta Sans", "Meta Serif");
+
+$fontTypes: (
+    "regular": (
+        "weight": normal,
+        "style": normal
+    ),
+    "italic": (
+        "weight": normal,
+        "style": italic
+    ),
+    "bold": (
+        "weight": bold,
+        "style": normal
+    )
+);
+
+@each $font in $fonts {
+    $fileNameBase: string.to-lower-case(fn.stringReplace($font, " ", "-"));
+    @each $typeName, $props in $fontTypes {
+        @font-face {
+            font-family: $font;
+            font-weight: map.get($props, "weight");
+            font-style: map.get($props, "style");
+            src: url("/src/assets/fonts/#{$fileNameBase}-#{$typeName}.woff2") format("woff2");
+        }
+    }
+}
+
+html {
+    @include tg.body;
+    overflow-y: scroll;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.web-app-container {
+    max-width: 800px;
+    margin-inline: auto;
+    padding: 16px;
+
+    @include rs.mqMedium {
+        padding-block: 40px;
+    }
+}

@@ -1,0 +1,51 @@
+stages:
+    - test
+    - build
+
+No unauthorized file changes:
+    stage: test
+    image: harbor.cicd.s15m.nl/docker-hub-proxy/alpine
+    allow_failure: true
+    script:
+        - echo "Unauthorized changes detected. Please be aware during review!"
+        - exit 1
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push"
+        - changes:
+              paths:
+                  - gitlab-ci.yml
+                  - scripts/check-package-json.ts
+
+Build for PRO1:
+    stage: build
+    image: harbor.cicd.s15m.nl/docker-hub-proxy/node:18-alpine
+    needs: []
+    before_script:
+        - npm install -g pnpm
+    script:
+        - npm install -g tsx
+        - pnpm i
+        - tsx scripts/reset-package-json.ts
+        - pnpm build-for-pro1
+    only:
+        - branches
+        - merge_requests
+    except:
+        - master
+
+Build for PRO2:
+    stage: build
+    image: harbor.cicd.s15m.nl/docker-hub-proxy/node:18-alpine
+    needs: []
+    before_script:
+        - npm install -g pnpm
+    script:
+        - npm install -g tsx
+        - pnpm i
+        - tsx scripts/reset-package-json.ts
+        - pnpm build
+    only:
+        - branches
+        - merge_requests
+    except:
+        - master
