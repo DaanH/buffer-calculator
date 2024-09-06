@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useContext } from "react";
+import { createContext, ReactNode, useState, useContext, useMemo } from "react";
 
 interface INav {
     activePage: string;
@@ -19,7 +19,8 @@ type NavContextProviderProps = { children: ReactNode };
 const NavContextProvider = ({ children }: NavContextProviderProps) => {
     const [activePage, setActivePage] = useState(navContextDefaultState.activePage);
 
-    return <NavContext.Provider value={{ activePage, setActivePage }}>{children}</NavContext.Provider>;
+    const value = useMemo(() => ({ activePage, setActivePage }), [activePage]);
+    return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 };
 
 export default NavContextProvider;

@@ -5,6 +5,18 @@ import createAssetPath from "./utils/createAssetPath";
 
 import NavContextProvider from "./hooks/useNav";
 
+declare global {
+    interface ImportMeta {
+        env: {
+            VITE_WEB_APP_ID: string;
+            MODE: string;
+            DEV: boolean;
+        };
+    }
+}
+
+const webAppId = import.meta.env.VITE_WEB_APP_ID as string;
+
 /* eslint-disable react/no-multi-comp */
 
 const DevStyles = ({ webAppId }: { webAppId: string }) => {
@@ -75,13 +87,11 @@ const ProdStyles = () => {
     );
 };
 
-const webAppId = import.meta.env.VITE_WEB_APP_ID as string;
-
+const Styles = () => (import.meta.env.DEV ? <DevStyles webAppId={webAppId} /> : <ProdStyles />);
 const Root = () => {
-    const Styles = () => (import.meta.env.DEV ? <DevStyles webAppId={webAppId} /> : <ProdStyles />);
     return (
         <NavContextProvider>
-            {/* <Styles /> */}
+            <Styles />
             <App />
         </NavContextProvider>
     );

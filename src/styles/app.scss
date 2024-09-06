@@ -1,8 +1,6 @@
 @use "variables" as var;
 @use "typography" as tg;
 
-@forward "normalize.css";
-@forward "reset";
 @forward "root";
 @forward "page";
 @forward "wayfinder";
@@ -12,3 +10,7 @@
 @forward "icons-overview";
 @forward "loader";
 @forward "fonts-and-icons";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
