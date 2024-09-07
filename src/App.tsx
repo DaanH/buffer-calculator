@@ -7,12 +7,14 @@ import Typography from "./pages/Typography";
 import FontsAndIcons from "./pages/FontsAndIcons";
 
 import "./styles/app.scss";
+import BufferCalculator from "./buffer-calculator/BufferCalculator";
 
 interface PagesMap {
     [key: string]: () => JSX.Element;
 }
 
 const pages: PagesMap = {
+    calculator: BufferCalculator,
     home: Home,
     externalData: ExternalData,
     typography: Typography,

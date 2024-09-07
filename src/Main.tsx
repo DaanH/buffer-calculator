@@ -15,7 +15,7 @@ declare global {
     }
 }
 
-const webAppId = import.meta.env.VITE_WEB_APP_ID as string;
+const { VITE_WEB_APP_ID, MODE, DEV } = import.meta.env;
 
 /* eslint-disable react/no-multi-comp */
 
@@ -71,7 +71,7 @@ const ProdStyles = () => {
     const [cssUrls, setCssUrls] = useState<string[] | null>(null);
 
     useEffect(() => {
-        if (import.meta.env.MODE !== "cms") {
+        if (MODE !== "cms") {
             getAssetsFromManifest().then((assets) => {
                 setCssUrls(assets.cssUrls);
             });
@@ -87,7 +87,7 @@ const ProdStyles = () => {
     );
 };
 
-const Styles = () => (import.meta.env.DEV ? <DevStyles webAppId={webAppId} /> : <ProdStyles />);
+const Styles = () => (DEV ? <DevStyles webAppId={VITE_WEB_APP_ID} /> : <ProdStyles />);
 const Root = () => {
     return (
         <NavContextProvider>
@@ -97,7 +97,7 @@ const Root = () => {
     );
 };
 
-const container = document.getElementById(webAppId);
+const container = document.getElementById(VITE_WEB_APP_ID);
 container?.attachShadow({ mode: "open" });
 const shadowRoot = container?.shadowRoot;
 

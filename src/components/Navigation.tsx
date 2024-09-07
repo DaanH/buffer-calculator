@@ -5,6 +5,7 @@ const wayFinderArgs = {
     className: "navigation",
     onGrayBackground: true,
     pages: [
+        { href: "calculator", title: "Calculator" },
         {
             href: "home",
             title: "Home"
