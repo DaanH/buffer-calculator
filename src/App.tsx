@@ -10,25 +10,25 @@ import "./styles/app.scss";
 import BufferCalculator from "./buffer-calculator/BufferCalculator";
 
 interface PagesMap {
-    [key: string]: () => JSX.Element;
+	[key: string]: () => JSX.Element;
 }
 
 const pages: PagesMap = {
-    calculator: BufferCalculator,
-    home: Home,
-    externalData: ExternalData,
-    typography: Typography,
-    fontsAndIcons: FontsAndIcons
+	calculator: BufferCalculator,
+	home: Home,
+	externalData: ExternalData,
+	typography: Typography,
+	fontsAndIcons: FontsAndIcons
 };
 
 const App = () => {
-    const { activePage } = useNav();
-    const ActivePage = pages[activePage];
-    return (
-        <div className="web-app">
-            <Navigation />
-            <ActivePage />
-        </div>
-    );
+	const { activePage } = useNav();
+	const ActivePage = pages[activePage];
+	return (
+		<div className="web-app">
+			<Navigation />
+			<ActivePage />
+		</div>
+	);
 };
 export default App;
