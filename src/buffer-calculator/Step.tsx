@@ -2,6 +2,7 @@ import { ChangeEventHandler, useCallback } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
 import { stepFields } from "./steps";
+import Progress from "./Progress";
 
 const Step = () => {
 	const { t } = useTranslation();
@@ -9,7 +10,6 @@ const Step = () => {
 
 	const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
 		(e) => {
-			console.log("change", step, e.target.value, e.target.id);
 			setVar(`${step}.${e.target.id}`, parseInt(e.target.value, 10));
 		},
 		[step]
@@ -17,7 +17,7 @@ const Step = () => {
 
 	return (
 		<div className=" ">
-			<div>stappenheader</div>
+			<Progress />
 			<h2>{t(`steps.${step}.title`)}</h2>
 			<hr />
 			<div>
