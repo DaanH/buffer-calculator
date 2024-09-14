@@ -20,7 +20,8 @@ module.exports = {
 				mossGreen: "#777b00",
 				darkBlue: "#01689b",
 				skyBlue: "#007bc7",
-				lightBlue: "#8fcae7"
+				lightBlue: "#8fcae7",
+				background: "#f3f3f3"
 			}
 		}
 	},

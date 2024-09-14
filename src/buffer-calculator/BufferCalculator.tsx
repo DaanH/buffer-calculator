@@ -1,30 +1,37 @@
+import { FC } from "react";
 import CalculatorContextProvider, { useCalculatorContext } from "./CalculatorContext";
 import CalculatorSelection from "./CalculatorSelection";
+import Step from "./Step";
+import { Steps } from "./steps";
 
 const BufferCalculator = () => {
 	return (
 		<CalculatorContextProvider>
-			<div className="bg-slate-500 ">
+			<div className="bg-background p-8">
 				<PageSelector />
 			</div>
 		</CalculatorContextProvider>
 	);
 };
 
+const StepComponents: Record<Steps, FC> = {
+	[Steps.Organization]: CalculatorSelection,
+	[Steps.Capital]: Step,
+	[Steps.Buildings]: Step,
+	[Steps.Assets]: Step,
+	[Steps.Riskbuffer]: Step,
+	[Steps.Result]: () => <div>Result</div>
+};
+
 const PageSelector = () => {
-	const { flow, currentStep, setCurrentStep } = useCalculatorContext();
-	if (currentStep === -1) {
-		return <CalculatorSelection />;
-	}
+	const { flow, step, reset } = useCalculatorContext();
+
+	const StepComponent = StepComponents[step];
 	return (
-		<div className="bg-white ">
+		<div>
 			<div>flow : {flow}</div>
-			<button
-				type="button"
-				onClick={() => {
-					setCurrentStep(-1);
-				}}
-			>
+			<StepComponent />
+			<button type="button" onClick={reset}>
 				Terug
 			</button>
 		</div>
