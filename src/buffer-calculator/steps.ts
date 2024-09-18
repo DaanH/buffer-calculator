@@ -12,13 +12,17 @@ export enum Steps {
 	Result = "result"
 }
 
-export const stepFields: Record<Steps, string[]> = {
-	[Steps.Organization]: [],
-	[Steps.Capital]: ["total", "private"],
-	[Steps.Buildings]: ["total"],
-	[Steps.Assets]: ["total", "current-building-value"],
-	[Steps.Riskbuffer]: ["total"],
-	[Steps.Result]: []
+type StepProps = {
+	fields: string[];
+	summary: (vars: Record<string, number>, flow: FlowLabels) => string;
+};
+export const stepProps: Record<Steps, StepProps> = {
+	[Steps.Organization]: { fields: [], summary: (vars, flow) => flow },
+	[Steps.Capital]: { fields: ["total", "private"], summary: (vars) => "c" },
+	[Steps.Buildings]: { fields: ["total"], summary: (vars) => "b" },
+	[Steps.Assets]: { fields: ["total", "current-building-value"], summary: (vars) => "a" },
+	[Steps.Riskbuffer]: { fields: ["total"], summary: (vars) => "r" },
+	[Steps.Result]: { fields: [], summary: (vars) => "res" }
 };
 
 export const flowSteps: Record<FlowLabels, Steps[]> = {

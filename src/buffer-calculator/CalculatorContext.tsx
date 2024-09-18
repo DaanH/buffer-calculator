@@ -8,7 +8,7 @@ type ContextType = {
 	setFlow: (flow: FlowLabels) => void;
 	step: Steps;
 	nextStep: () => void;
-	reset: () => void;
+	setStep: (index: number) => void;
 	setVar: (key: string, value: number) => void;
 	vars: Record<string, number>;
 };
@@ -25,11 +25,11 @@ const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 			nextStep: () => setCurrentStep((prev) => prev + 1),
 			flow,
 			setFlow,
-			reset: () => setCurrentStep(0),
+			setStep: (index: number) => setCurrentStep(index),
 			setVar: (key: string, value: number) => setVars((prev) => ({ ...prev, [key]: value })),
 			vars
 		}),
-		[currentStep, setCurrentStep, flow, setFlow]
+		[currentStep, setCurrentStep, flow, setFlow, vars]
 	);
 	return <calculatorContext.Provider value={value}>{children}</calculatorContext.Provider>;
 };

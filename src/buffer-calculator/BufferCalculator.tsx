@@ -24,14 +24,14 @@ const StepComponents: Record<Steps, FC> = {
 };
 
 const PageSelector = () => {
-	const { flow, step, reset } = useCalculatorContext();
+	const { flow, step, setStep } = useCalculatorContext();
 
 	const StepComponent = StepComponents[step];
 	return (
 		<div>
 			<div>flow : {flow}</div>
 			<StepComponent />
-			<button type="button" onClick={reset}>
+			<button type="button" onClick={() => setStep(0)}>
 				Terug
 			</button>
 		</div>

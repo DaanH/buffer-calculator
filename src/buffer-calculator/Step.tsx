@@ -1,12 +1,12 @@
 import { ChangeEventHandler, useCallback } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
-import { stepFields } from "./steps";
+import { stepProps } from "./steps";
 import Progress from "./Progress";
 
 const Step = () => {
 	const { t } = useTranslation();
-	const { step, nextStep, setVar } = useCalculatorContext();
+	const { step, nextStep, setVar, vars } = useCalculatorContext();
 
 	const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
 		(e) => {
@@ -18,10 +18,18 @@ const Step = () => {
 	return (
 		<div className=" ">
 			<Progress />
+			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
+				{Object.entries(vars).map(([key, value]) => (
+					<div>
+						<span className="inline-block  w-40">{key}</span>
+						{value}
+					</div>
+				))}
+			</div>
 			<h2>{t(`steps.${step}.title`)}</h2>
 			<hr />
 			<div>
-				{stepFields[step].map((field) => (
+				{stepProps[step].fields.map((field) => (
 					<label key={field} className="flex flex-col gap-4 items-start">
 						<span>{t(`steps.${step}.labels.${field}`)}</span>
 						<input type="number" id={field} onChange={onChange} />

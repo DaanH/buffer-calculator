@@ -6,7 +6,7 @@ import { ReactComponent as SchoolIcon } from "../assets/icons/school.svg";
 import { ReactComponent as WalletIcon } from "../assets/icons/wallet.svg";
 import { ReactComponent as WarningIcon } from "../assets/icons/warning.svg";
 import { useCalculatorContext } from "./CalculatorContext";
-import { FlowLabels, flowSteps, Steps } from "./steps";
+import { FlowLabels, flowSteps, stepProps, Steps } from "./steps";
 
 const iconsByStep: Record<Steps, ReactNode> = {
 	[Steps.Organization]: <SchoolIcon />,
@@ -24,24 +24,31 @@ const TabIcon = ({ step }: { step: Steps }) => {
 };
 
 const Progress = () => {
-	const { flow, step } = useCalculatorContext();
+	const { flow, vars, step, setStep } = useCalculatorContext();
 	const currentIndex = flowSteps[flow].indexOf(step);
 	return (
-		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-32 w-full text-[15px]">
+		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-32 w-full text-[14px] leading-4">
 			{flowSteps[flow].map((flowStep, index) => (
 				<div
 					key={flowStep}
-					className={`w-1 flex items-center justify-center flex-col gap-2 flex-grow border-mossGreen ${
+					className={`w-1 flex items-center justify-center flex-col flex-grow border-mossGreen ${
 						index < currentIndex ? "bg-[#f9f9f9]" : ""
 					} 
 					${index > currentIndex ? "bg-[#e6e6e6]" : ""}
 					${currentIndex === index ? "bg-white border-t-8 mt-0" : "mt-4"}
 					`}
 				>
-					<div className="flex text-lg fill-mossGreen items-center justify-center w-12 h-12 bg-white rounded-full border-2 border-mossGreen">
+					<div className="flex text-3xl fill-mossGreen items-center justify-center w-12 h-12 ">
 						<TabIcon step={flowStep} />
 					</div>
-					{flowStep}
+					<div className="font-bold">{flowStep}</div>
+					<br />
+					<div>{stepProps[flowStep].summary(vars, flow)}</div>
+					{index < currentIndex && (
+						<button className="underline text-skyBlue" type="button" onClick={() => setStep(index)}>
+							aanpassen
+						</button>
+					)}
 				</div>
 			))}
 		</div>
