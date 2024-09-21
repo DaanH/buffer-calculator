@@ -35,4 +35,7 @@ describe("toNumber", () => {
 		expect(toNumber("12.34a")).toBe(1234);
 		expect(toNumber("€ 123.456.7")).toBe(1234567);
 	});
+	it("should handle undefined", () => {
+		expect(toNumber(undefined as unknown as string)).toBe(0);
+	});
 });

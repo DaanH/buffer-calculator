@@ -1,9 +1,10 @@
-import { ChangeEventHandler, useCallback } from "react";
+import { ChangeEventHandler, Fragment, useCallback } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
 import Progress from "./Progress";
 import { stepProps } from "./steps";
 import { formatThousands } from "./helpers";
+import Explanation from "./Explanation";
 
 const Step = () => {
 	const { t } = useTranslation();
@@ -22,10 +23,11 @@ const Step = () => {
 		<div className="flex flex-col gap-2 items-start ">
 			<Progress />
 
-			<h2>{t(`steps.${step}.title`)}</h2>
+			<h3 className="text-xl font-bold mt-4">{t(`steps.${step}.title`)}</h3>
+			<Explanation />
 			<hr />
 			{stepProps[step].fields.map((field) => (
-				<>
+				<Fragment key={field}>
 					<span>{t(`steps.${step}.labels.${field}`)}</span>
 					<input
 						type="text"
@@ -34,7 +36,7 @@ const Step = () => {
 						value={vars[`${step}.${field}`] || "€ "}
 						className="px-2 flex gap-2 bg-white"
 					/>
-				</>
+				</Fragment>
 			))}
 			<button type="button" className="bg-darkBlue py-2 px-3 text-white" onClick={nextStep}>
 				{t("steps.buttons.next-step")}

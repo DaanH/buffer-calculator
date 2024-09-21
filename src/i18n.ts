@@ -7,7 +7,7 @@ const translation: Record<string, string> = {
 	"steps.capital.name": "Eigen vermogen",
 	"steps.buildings.name": "Gebouwen",
 	"steps.assets.name": "Resterende MVA",
-	"steps.risk_buffer.name": "Risicobuffer",
+	"steps.risk-buffer.name": "Risicobuffer",
 
 	// step content
 	"select-form.submit": "Ga verder",

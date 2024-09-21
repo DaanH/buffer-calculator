@@ -5,6 +5,7 @@ import { ReactComponent as PartnershipIcon } from "../assets/icons/partnership.s
 import { ReactComponent as SchoolIcon } from "../assets/icons/school.svg";
 import { ReactComponent as WalletIcon } from "../assets/icons/wallet.svg";
 import { ReactComponent as WarningIcon } from "../assets/icons/warning.svg";
+import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
 import { FlowLabels, flowSteps, stepProps, Steps } from "./steps";
 
@@ -24,11 +25,12 @@ const TabIcon = ({ step }: { step: Steps }) => {
 };
 
 const Progress = () => {
+	const { t } = useTranslation();
 	const { flow, vars, step, setStep } = useCalculatorContext();
 	const currentIndex = flowSteps[flow].indexOf(step);
 	return (
 		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-32 w-full text-[0.75rem] leading-4">
-			{flowSteps[flow].map((flowStep, index) => (
+			{flowSteps[flow].slice(0, -1).map((flowStep, index) => (
 				<div
 					key={flowStep}
 					className={`w-1 flex items-center justify-center flex-col flex-grow border-mossGreen 
@@ -40,7 +42,7 @@ const Progress = () => {
 					<div className="flex text-3xl fill-mossGreen items-center justify-center w-12 h-12 ">
 						<TabIcon step={flowStep} />
 					</div>
-					<div className="font-bold">{flowStep}</div>
+					<div className="font-bold">{t(`steps.${flowStep}.name`)}</div>
 					<br />
 					<div>{stepProps[flowStep].summary(vars, flow)}</div>
 					{index < currentIndex && (

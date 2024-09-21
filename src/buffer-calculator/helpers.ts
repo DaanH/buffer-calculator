@@ -7,11 +7,12 @@ const formatter = new Intl.NumberFormat("nl-NL", {
 });
 
 export const formatThousands = (str: string) => {
-	console.log("formatThousands", str, str.length);
-	return str.length > 2 ? formatter.format(toNumber(str)) : "€ ";
+	const cleaned = str.replaceAll(/[^0-9]/g, "");
+	return cleaned.length > 0 ? formatter.format(toNumber(str)) : "€ ";
 };
 
 export const toNumber = (str: string) => {
+	if (!str) return 0;
 	const cleaned = str.replaceAll(/[^0-9]/g, "");
 	return cleaned ? parseInt(cleaned, 10) : 0;
 };
