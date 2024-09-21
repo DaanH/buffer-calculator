@@ -4,6 +4,8 @@
 	"version": "1.0.0",
 	"scripts": {
 		"dev": "vite && prettier **/* --write",
+		"test": "vitest",
+
 		"preview": "vite preview",
 		"build": "vite build",
 		"build-for-pro1": "vite build --mode cms",
@@ -46,6 +48,7 @@
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
 		"vite-plugin-html": "^3.2.0",
-		"vite-plugin-react-md": "^1.0.1"
+		"vite-plugin-react-md": "^1.0.1",
+		"vitest": "^2.1.1"
 	}
 }

@@ -9,8 +9,8 @@ type ContextType = {
 	step: Steps;
 	nextStep: () => void;
 	setStep: (index: number) => void;
-	setVar: (key: string, value: number) => void;
-	vars: Record<string, number>;
+	setVar: (key: string, value: string) => void;
+	vars: Record<string, string>;
 };
 
 const calculatorContext = createContext<ContextType>({} as ContextType);
@@ -18,15 +18,15 @@ const calculatorContext = createContext<ContextType>({} as ContextType);
 const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [flow, setFlow] = useState(FlowLabels.School);
-	const [vars, setVars] = useState<Record<string, number>>({});
-	const value = useMemo(
+	const [vars, setVars] = useState<Record<string, string>>({});
+	const value = useMemo<ContextType>(
 		() => ({
 			step: flowSteps[flow][currentStep],
 			nextStep: () => setCurrentStep((prev) => prev + 1),
 			flow,
 			setFlow,
 			setStep: (index: number) => setCurrentStep(index),
-			setVar: (key: string, value: number) => setVars((prev) => ({ ...prev, [key]: value })),
+			setVar: (key: string, value: string) => setVars((prev) => ({ ...prev, [key]: value })),
 			vars
 		}),
 		[currentStep, setCurrentStep, flow, setFlow, vars]

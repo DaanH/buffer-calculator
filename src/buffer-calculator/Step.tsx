@@ -1,8 +1,9 @@
 import { ChangeEventHandler, useCallback } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
-import { stepProps } from "./steps";
 import Progress from "./Progress";
+import { stepProps } from "./steps";
+import { formatThousands } from "./helpers";
 
 const Step = () => {
 	const { t } = useTranslation();
@@ -10,13 +11,15 @@ const Step = () => {
 
 	const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
 		(e) => {
-			setVar(`${step}.${e.target.id}`, parseInt(e.target.value, 10));
+			const v = e.target.value;
+			const newValue = formatThousands(v);
+			setVar(`${step}.${e.target.id}`, newValue);
 		},
 		[step]
 	);
 
 	return (
-		<div className=" ">
+		<div className="flex flex-col gap-2 items-start ">
 			<Progress />
 			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
 				{Object.entries(vars).map(([key, value]) => (
@@ -28,15 +31,19 @@ const Step = () => {
 			</div>
 			<h2>{t(`steps.${step}.title`)}</h2>
 			<hr />
-			<div>
-				{stepProps[step].fields.map((field) => (
-					<label key={field} className="flex flex-col gap-4 items-start">
-						<span>{t(`steps.${step}.labels.${field}`)}</span>
-						<input type="number" id={field} onChange={onChange} />
-					</label>
-				))}
-			</div>
-			<button type="button" className="bg-darkBlue p-8" onClick={nextStep}>
+			{stepProps[step].fields.map((field) => (
+				<>
+					<span>{t(`steps.${step}.labels.${field}`)}</span>
+					<input
+						type="text"
+						id={field}
+						onChange={onChange}
+						value={vars[`${step}.${field}`] || "€ "}
+						className="px-2 flex gap-2 bg-white"
+					/>
+				</>
+			))}
+			<button type="button" className="bg-darkBlue py-2 px-3 text-white" onClick={nextStep}>
 				{t("steps.buttons.next-step")}
 			</button>
 		</div>
