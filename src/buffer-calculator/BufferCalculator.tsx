@@ -3,6 +3,7 @@ import CalculatorContextProvider, { useCalculatorContext } from "./CalculatorCon
 import CalculatorSelection from "./CalculatorSelection";
 import Step from "./Step";
 import { Steps } from "./steps";
+import ResultStep from "./ResultStep";
 
 const BufferCalculator = () => {
 	return (
@@ -20,22 +21,14 @@ const StepComponents: Record<Steps, FC> = {
 	[Steps.Buildings]: Step,
 	[Steps.Assets]: Step,
 	[Steps.Riskbuffer]: Step,
-	[Steps.Result]: () => <div>Result</div>
+	[Steps.Result]: ResultStep
 };
 
 const PageSelector = () => {
-	const { flow, step, setStep } = useCalculatorContext();
+	const { step } = useCalculatorContext();
 
 	const StepComponent = StepComponents[step];
-	return (
-		<div>
-			<div>flow : {flow}</div>
-			<StepComponent />
-			<button type="button" onClick={() => setStep(0)}>
-				Terug
-			</button>
-		</div>
-	);
+	return <StepComponent />;
 };
 
 export default BufferCalculator;

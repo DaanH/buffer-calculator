@@ -21,14 +21,7 @@ const Step = () => {
 	return (
 		<div className="flex flex-col gap-2 items-start ">
 			<Progress />
-			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
-				{Object.entries(vars).map(([key, value]) => (
-					<div key={key}>
-						<span className="inline-block  w-40">{key}</span>
-						{value}
-					</div>
-				))}
-			</div>
+
 			<h2>{t(`steps.${step}.title`)}</h2>
 			<hr />
 			{stepProps[step].fields.map((field) => (
@@ -46,6 +39,14 @@ const Step = () => {
 			<button type="button" className="bg-darkBlue py-2 px-3 text-white" onClick={nextStep}>
 				{t("steps.buttons.next-step")}
 			</button>
+			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
+				{Object.entries(vars).map(([key, value]) => (
+					<div key={key}>
+						<span className="inline-block  w-40">{key}</span>
+						{value}
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };

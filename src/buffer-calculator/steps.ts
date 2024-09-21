@@ -27,7 +27,7 @@ export const stepProps: Record<Steps, StepProps> = {
 			return `€ ${toNumber(vars["capital.total"]) - toNumber(vars["capital.private"])}`;
 		}
 	},
-	[Steps.Buildings]: { fields: ["total"], summary: (vars) => "b" },
+	[Steps.Buildings]: { fields: ["total"], summary: (vars) => `€ ${toNumber(vars["buildings.total"])}` },
 	[Steps.Assets]: { fields: ["total", "current-building-value"], summary: (vars) => "a" },
 	[Steps.Riskbuffer]: { fields: ["total"], summary: (vars) => "r" },
 	[Steps.Result]: { fields: [], summary: (vars) => "res" }

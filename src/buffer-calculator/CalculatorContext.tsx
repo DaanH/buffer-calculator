@@ -24,7 +24,10 @@ const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 			step: flowSteps[flow][currentStep],
 			nextStep: () => setCurrentStep((prev) => prev + 1),
 			flow,
-			setFlow,
+			setFlow: (flow: FlowLabels) => {
+				setFlow(flow);
+				setVars({});
+			},
 			setStep: (index: number) => setCurrentStep(index),
 			setVar: (key: string, value: string) => setVars((prev) => ({ ...prev, [key]: value })),
 			vars
