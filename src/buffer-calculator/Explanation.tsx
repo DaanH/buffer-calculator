@@ -30,6 +30,10 @@ const Explanation = () => {
 		ref.current?.style.setProperty("height", `${height}px`);
 	}, [isOpen]);
 
+	useEffect(() => {
+		setIsOpen(false);
+	}, [step]);
+
 	return (
 		<>
 			<div ref={ref} className="relative w-full overflow-hidden transition-all duration-300">
