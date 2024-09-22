@@ -29,7 +29,7 @@ const Progress = () => {
 	const { flow, vars, step, setStep } = useCalculatorContext();
 	const currentIndex = flowSteps[flow].indexOf(step);
 	return (
-		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-32 w-full text-[0.75rem] leading-4">
+		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-36 w-full text-[0.75rem] leading-4">
 			{flowSteps[flow].slice(0, -1).map((flowStep, index) => (
 				<div
 					key={flowStep}
@@ -42,8 +42,7 @@ const Progress = () => {
 					<div className="flex text-3xl fill-mossGreen items-center justify-center w-12 h-12 ">
 						<TabIcon step={flowStep} />
 					</div>
-					<div className="font-bold">{t(`steps.${flowStep}.name`)}</div>
-					<br />
+					<div className="font-bold mb-2">{t(`steps.${flowStep}.name`)}</div>
 					<div>{stepProps[flowStep].summary(vars, flow)}</div>
 					{index < currentIndex && (
 						<button className="underline text-skyBlue" type="button" onClick={() => setStep(index)}>
