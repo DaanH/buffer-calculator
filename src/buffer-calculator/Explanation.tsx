@@ -11,7 +11,7 @@ const Explanation = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const text = t(`steps.${step}.help`);
-	const clippedText = isOpen ? text : text.slice(0, MAX_LENGTH) + "...";
+	const clippedText = text.slice(0, MAX_LENGTH) + "...";
 
 	const buttonText = useMemo(() => {
 		if (isOpen) {
@@ -32,18 +32,20 @@ const Explanation = () => {
 
 	return (
 		<>
-			<div ref={ref} className="relative w-full overflow-hidden transition-all duration-1000">
+			<div ref={ref} className="relative w-full overflow-hidden transition-all duration-300">
 				<div
 					ref={clippedRef}
 					dangerouslySetInnerHTML={{ __html: clippedText }}
 					data-text="clipped"
-					className={`top-0 w-full transition-opacity ${isOpen ? "opacity-0" : "absolute "}`}
+					className={`top-0 w-full transition-opacity duration-300 ${isOpen ? "opacity-0" : "absolute "}`}
 				/>
 				<div
 					ref={fullRef}
 					dangerouslySetInnerHTML={{ __html: text }}
 					data-text="full"
-					className={`top-0 w-full transition-opacity absolute ${isOpen ? "opacity-0" : undefined}`}
+					className={`top-0 w-full transition-opacity duration-300 absolute  ${
+						isOpen ? "opacity-100" : "opacity-0"
+					}`}
 				/>
 			</div>
 			<button
