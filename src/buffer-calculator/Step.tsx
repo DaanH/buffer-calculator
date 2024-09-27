@@ -26,7 +26,7 @@ const Step = () => {
 			<Progress />
 
 			<h3 className="text-xl font-bold mt-4">{t(`steps.${step}.title`)}</h3>
-			<Explanation />
+			<Explanation text={t(`steps.${step}.help`)} />
 			<hr />
 			{stepProps[step].fields.map((field) => (
 				<Fragment key={field}>

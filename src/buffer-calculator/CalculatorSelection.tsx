@@ -18,7 +18,7 @@ const CalculatorSelection = () => {
 						type="button"
 						onClick={() => setLocalFlow(flowLabel)}
 					>
-						{flowLabel}
+						{t(`select-form.${flowLabel}`)}
 						<Radio checked={localFlow === flowLabel} />
 					</button>
 				))}

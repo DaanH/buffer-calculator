@@ -1,11 +1,18 @@
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
+import Explanation from "./Explanation";
+import Progress from "./Progress";
 
 const ResultStep = () => {
-	const { vars, setStep } = useCalculatorContext();
+	const { step, vars, setStep, flow } = useCalculatorContext();
 	const { t } = useTranslation();
 	return (
 		<div>
+			<Progress />
+
+			<h3 className="text-xl font-bold mt-4">{t(`steps.${step}.title`)}</h3>
+			<Explanation text={t(`result.help.${flow}`)} />
+
 			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
 				{Object.entries(vars).map(([key, value]) => (
 					<div key={key}>

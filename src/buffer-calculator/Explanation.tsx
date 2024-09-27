@@ -5,12 +5,15 @@ import { useCalculatorContext } from "./CalculatorContext";
 
 const MAX_LENGTH = 140;
 
-const Explanation = () => {
+interface Props {
+	text: string;
+}
+
+const Explanation = ({ text }: Props) => {
 	const { t } = useTranslation();
 	const { step } = useCalculatorContext();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const text = t(`steps.${step}.help`);
 	const clippedText = text.slice(0, MAX_LENGTH) + "...";
 
 	const buttonText = useMemo(() => {

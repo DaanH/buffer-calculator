@@ -54,9 +54,9 @@ const translation: Record<string, string> = {
 	"steps.risk-buffer.labels.total": "Hoeveel bedraagt het totaal aan baten?",
 
 	// Results
-	"result.title": "Berekening",
-	"result.more-help": "Hoe komt deze berekening tot stand?",
-	"result.less-help": "Sluiten",
+	"steps.result.title": "Berekening",
+	"steps.result.more-help": "Hoe komt deze berekening tot stand?",
+	"steps.result.less-help": "Sluiten",
 	"result.help.partnership": `
          <h4>Totaal eigen vermogen</h4>
          <p>Het bedrag dat u kunt aflezen van uw balans.<br>
@@ -81,7 +81,7 @@ const translation: Record<string, string> = {
          <p>Het verhoudingsgetal tussen uw feitelijk en normatief eigen vermogen.<br />
          <strong>Bedrag:</strong> Feitelijk eigen vermogen / normatief eigen vermogen. Een getal boven de 1 duidt op mogelijk bovenmatig eigen vermogen.</p>
         `,
-	"result.help.singleSchool": `
+	"result.help.school": `
         <h4>Totaal eigen vermogen</h4>
         <p>Het bedrag dat u kunt aflezen van uw balans.<br />
         <strong>Bedrag:</strong> Het door u ingevulde bedrag bij Eigen vermogen.</p>

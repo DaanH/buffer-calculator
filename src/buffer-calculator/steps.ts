@@ -2,8 +2,8 @@ import { CalculatorContextType } from "./CalculatorContext";
 import { summary } from "./helpers";
 
 export enum FlowLabels {
-	School = "School",
-	Partnership = "Samenwerkingsverband"
+	School = "school",
+	Partnership = "partnership"
 }
 
 export enum Steps {
@@ -17,13 +17,13 @@ export enum Steps {
 
 type StepProps = {
 	fields: string[];
-	summary: (vars: CalculatorContextType["vars"], flow: FlowLabels) => string;
+	summary: (vars: CalculatorContextType["vars"], flow: FlowLabels, t: (key: string) => string) => string;
 };
 
 export const stepProps: Record<Steps, StepProps> = {
 	[Steps.Organization]: {
 		fields: [],
-		summary: (_vars, flow) => flow
+		summary: (_vars, flow, t) => t(`select-form.${flow}`)
 	},
 	[Steps.Capital]: {
 		fields: ["total", "private"],
