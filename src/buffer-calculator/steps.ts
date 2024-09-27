@@ -1,4 +1,5 @@
-import { toNumber } from "./helpers";
+import { CalculatorContextType } from "./CalculatorContext";
+import { summary } from "./helpers";
 
 export enum FlowLabels {
 	School = "School",
@@ -16,21 +17,34 @@ export enum Steps {
 
 type StepProps = {
 	fields: string[];
-	summary: (vars: Record<string, string>, flow: FlowLabels) => string;
+	summary: (vars: CalculatorContextType["vars"], flow: FlowLabels) => string;
 };
+
 export const stepProps: Record<Steps, StepProps> = {
-	[Steps.Organization]: { fields: [], summary: (vars, flow) => flow },
+	[Steps.Organization]: {
+		fields: [],
+		summary: (_vars, flow) => flow
+	},
 	[Steps.Capital]: {
 		fields: ["total", "private"],
-		summary: (vars) => {
-			if (!vars["capital.total"] || !vars["capital.private"]) return "";
-			return `€ ${toNumber(vars["capital.total"]) - toNumber(vars["capital.private"])}`;
-		}
+		summary: (vars) => summary(() => vars["capital.total"] - vars["capital.private"])
 	},
-	[Steps.Buildings]: { fields: ["total"], summary: (vars) => `€ ${toNumber(vars["buildings.total"])}` },
-	[Steps.Assets]: { fields: ["total", "current-building-value"], summary: (vars) => "a" },
-	[Steps.Riskbuffer]: { fields: ["total"], summary: (vars) => "r" },
-	[Steps.Result]: { fields: [], summary: (vars) => "res" }
+	[Steps.Buildings]: {
+		fields: ["total"],
+		summary: (vars) => summary(() => vars["buildings.total"])
+	},
+	[Steps.Assets]: {
+		fields: ["total", "current-building-value"],
+		summary: (vars) => summary(() => vars["assets.total"] - vars["assets.current-building-value"])
+	},
+	[Steps.Riskbuffer]: {
+		fields: ["total"],
+		summary: (vars) => summary(() => vars["risk-buffer.total"])
+	},
+	[Steps.Result]: {
+		fields: [],
+		summary: () => ""
+	}
 };
 
 export const flowSteps: Record<FlowLabels, Steps[]> = {

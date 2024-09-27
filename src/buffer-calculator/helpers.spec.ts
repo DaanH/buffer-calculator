@@ -1,22 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { formatThousands, toNumber } from "./helpers";
+import { formatThousands, summary, toNumber } from "./helpers";
 
 describe("formatThousands", () => {
 	it("should reformat a number to have dots every 3 digits", () => {
-		expect(formatThousands("€ 123456789")).toBe("€ 123.456.789");
-		expect(formatThousands("€ 12345678")).toBe("€ 12.345.678");
-		expect(formatThousands("€ 123")).toBe("€ 123");
-		expect(formatThousands("€ 12")).toBe("€ 12");
-	});
-
-	it("should handle empty strings", () => {
-		expect(formatThousands("")).toBe("€ ");
-		expect(formatThousands("€ ")).toBe("€ ");
-		expect(formatThousands("€")).toBe("€ ");
-	});
-
-	it("should remove non-numeric characters", () => {
-		expect(formatThousands("12.34a")).toBe("€ 1.234");
+		expect(formatThousands(123456789)).toBe("€ 123.456.789");
+		expect(formatThousands(12345678)).toBe("€ 12.345.678");
+		expect(formatThousands(123)).toBe("€ 123");
+		expect(formatThousands(12)).toBe("€ 12");
+		expect(formatThousands(0)).toBe("€ 0");
 	});
 });
 
@@ -37,5 +28,24 @@ describe("toNumber", () => {
 	});
 	it("should handle undefined", () => {
 		expect(toNumber(undefined as unknown as string)).toBe(0);
+	});
+});
+
+describe("summary", () => {
+	it("should return the result of the function", () => {
+		expect(summary(() => 1 + 2)).toBe("€ 3");
+	});
+	it("should return empty if the function returns other than valid number (NaN, undefined, null)", () => {
+		const v: Record<string, number> = {};
+		expect(summary(() => v["undef"] - 2)).toBe("€ 0");
+		expect(summary(() => NaN)).toBe("€ 0");
+		expect(summary(() => null as unknown as number)).toBe("€ 0");
+	});
+	it("should return empty if the function throws an error", () => {
+		expect(
+			summary(() => {
+				throw new Error("test");
+			})
+		).toBe("€ 0");
 	});
 });

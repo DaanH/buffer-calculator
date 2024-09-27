@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "../i18n";
 import { ChevronRight } from "../icons";
 import { useCalculatorContext } from "./CalculatorContext";
@@ -28,12 +28,15 @@ const Explanation = () => {
 	useEffect(() => {
 		const height = (isOpen ? fullRef.current?.clientHeight : clippedRef.current?.clientHeight) || 0;
 		ref.current?.style.setProperty("height", `${height}px`);
+		buttonRef.current?.style.setProperty("width", `${isOpen ? 170 : 430}px`);
 	}, [isOpen]);
 
 	useEffect(() => {
 		setIsOpen(false);
 	}, [step]);
 
+	const toggleOpen = useCallback(() => setIsOpen((isOpen) => !isOpen), []);
+	// button size moet transitie krijgen
 	return (
 		<>
 			<div ref={ref} className="relative w-full overflow-hidden transition-all duration-300">
@@ -55,11 +58,11 @@ const Explanation = () => {
 			<button
 				ref={buttonRef}
 				type="button"
-				className="flex mt-2 items-center gap-2 pl-2 -ml-2 text-darkBlue underline"
-				onClick={() => setIsOpen(!isOpen)}
+				className="flex mt-2 items-center justify-between gap-2 pl-2 -ml-2 text-button underline  transition-[width] duration-300"
+				onClick={toggleOpen}
 			>
-				{buttonText}
-				<div className="w-8 h-8 bg-darkBlue text-white flex items items-center justify-center">
+				<span>{buttonText}</span>
+				<div className="w-8 h-8 bg-button text-white flex items items-center justify-center">
 					<ChevronRight style={{ transform: isOpen ? "rotate(-90deg)" : "rotate(90deg)" }} />
 				</div>
 			</button>

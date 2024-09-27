@@ -14,7 +14,7 @@ const ResultStep = () => {
 					</div>
 				))}
 			</div>
-			<button className="bg-darkBlue py-2 px-3 text-white" type="button" onClick={() => setStep(0)}>
+			<button className="bg-button py-2 px-3 text-white" type="button" onClick={() => setStep(0)}>
 				{t("result.restart")}
 			</button>
 		</div>

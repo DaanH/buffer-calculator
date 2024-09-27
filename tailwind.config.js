@@ -21,7 +21,10 @@ module.exports = {
 				darkBlue: "#01689b",
 				skyBlue: "#007bc7",
 				lightBlue: "#8fcae7",
-				background: "#f3f3f3"
+				background: "#f3f3f3",
+
+				main: "#ffb612",
+				button: "#673327"
 			}
 		}
 	},

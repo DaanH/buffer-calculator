@@ -2,8 +2,8 @@ import { ChangeEventHandler, Fragment, useCallback } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
 import Progress from "./Progress";
-import { stepProps } from "./steps";
-import { formatThousands } from "./helpers";
+import { stepProps, Steps } from "./steps";
+import { formatThousands, toNumber } from "./helpers";
 import Explanation from "./Explanation";
 
 const Step = () => {
@@ -13,11 +13,13 @@ const Step = () => {
 	const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
 		(e) => {
 			const v = e.target.value;
-			const newValue = formatThousands(v);
-			setVar(`${step}.${e.target.id}`, newValue);
+			setVar(`${step}.${e.target.id}`, toNumber(v));
 		},
 		[step]
 	);
+
+	//is last step in flow?
+	const isLastStep = step === Steps.Riskbuffer;
 
 	return (
 		<div className="flex flex-col gap-2 items-start ">
@@ -33,13 +35,13 @@ const Step = () => {
 						type="text"
 						id={field}
 						onChange={onChange}
-						value={vars[`${step}.${field}`] || "€ "}
+						value={formatThousands(vars[`${step}.${field}`]) || "€ "}
 						className="px-2 flex gap-2 bg-white"
 					/>
 				</Fragment>
 			))}
-			<button type="button" className="bg-darkBlue py-2 px-3 text-white" onClick={nextStep}>
-				{t("steps.buttons.next-step")}
+			<button type="button" className="bg-button py-2 px-3 text-white" onClick={nextStep}>
+				{isLastStep ? t("steps.buttons.to-result") : t("steps.buttons.next-step")}
 			</button>
 			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
 				{Object.entries(vars).map(([key, value]) => (

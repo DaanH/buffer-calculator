@@ -1,9 +1,9 @@
 import { FC } from "react";
 import CalculatorContextProvider, { useCalculatorContext } from "./CalculatorContext";
 import CalculatorSelection from "./CalculatorSelection";
+import ResultStep from "./ResultStep";
 import Step from "./Step";
 import { Steps } from "./steps";
-import ResultStep from "./ResultStep";
 
 const BufferCalculator = () => {
 	return (

@@ -5,7 +5,6 @@
 	"scripts": {
 		"dev": "vite && prettier **/* --write",
 		"test": "vitest",
-
 		"preview": "vite preview",
 		"build": "vite build",
 		"build-for-pro1": "vite build --mode cms",
