@@ -26,7 +26,7 @@ const TabIcon = ({ step }: { step: Steps }) => {
 
 const Progress = () => {
 	const { t } = useTranslation();
-	const { flow, vars, step, setStep } = useCalculatorContext();
+	const { flow, vars, step, setStep, touchedSteps } = useCalculatorContext();
 	const currentIndex = flowSteps[flow].indexOf(step);
 	return (
 		<div className="flex flex-row flex-nowrap items-stretch gap-1 h-36 w-full text-[0.75rem] leading-4">
@@ -42,10 +42,10 @@ const Progress = () => {
 						<TabIcon step={flowStep} />
 					</div>
 					<div className="font-bold mb-2">{t(`steps.${flowStep}.name`)}</div>
-					<div>{stepProps[flowStep].summary(vars, flow, t)}</div>
-					{index < currentIndex && (
+					<div>{touchedSteps[flowStep] && stepProps[flowStep].summary(vars, flow, t)}</div>
+					{touchedSteps[flowStep] && (
 						<button className="underline text-skyBlue" type="button" onClick={() => setStep(index)}>
-							aanpassen
+							{t("steps.all.change")}
 						</button>
 					)}
 				</div>

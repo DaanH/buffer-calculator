@@ -3,18 +3,20 @@ import { useTranslation } from "../i18n";
 import { ChevronRight } from "../icons";
 import { useCalculatorContext } from "./CalculatorContext";
 
-const MAX_LENGTH = 140;
+const MIN_LENGTH = 140;
 
 interface Props {
 	text: string;
+	buttonFirst?: boolean;
+	minimizedSize?: number;
 }
 
-const Explanation = ({ text }: Props) => {
+const Explanation = ({ text, buttonFirst = false, minimizedSize = MIN_LENGTH }: Props) => {
 	const { t } = useTranslation();
 	const { step } = useCalculatorContext();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const clippedText = text.slice(0, MAX_LENGTH) + "...";
+	const clippedText = text.slice(0, minimizedSize) + (minimizedSize ? "..." : "");
 
 	const buttonText = useMemo(() => {
 		if (isOpen) {
@@ -40,8 +42,24 @@ const Explanation = ({ text }: Props) => {
 
 	const toggleOpen = useCallback(() => setIsOpen((isOpen) => !isOpen), []);
 	// button size moet transitie krijgen
+
+	const buttonEl = (
+		<button
+			ref={buttonRef}
+			type="button"
+			className="flex mt-2 items-center justify-between gap-2 pl-2 -ml-2 text-button underline  transition-[width] duration-300"
+			onClick={toggleOpen}
+		>
+			<span>{buttonText}</span>
+			<div className="w-8 h-8 bg-button text-white flex items items-center justify-center">
+				<ChevronRight style={{ transform: isOpen ? "rotate(-90deg)" : "rotate(90deg)" }} />
+			</div>
+		</button>
+	);
+
 	return (
 		<>
+			{buttonFirst ? buttonEl : null}
 			<div ref={ref} className="relative w-full overflow-hidden transition-all duration-300">
 				<div
 					ref={clippedRef}
@@ -58,17 +76,7 @@ const Explanation = ({ text }: Props) => {
 					}`}
 				/>
 			</div>
-			<button
-				ref={buttonRef}
-				type="button"
-				className="flex mt-2 items-center justify-between gap-2 pl-2 -ml-2 text-button underline  transition-[width] duration-300"
-				onClick={toggleOpen}
-			>
-				<span>{buttonText}</span>
-				<div className="w-8 h-8 bg-button text-white flex items items-center justify-center">
-					<ChevronRight style={{ transform: isOpen ? "rotate(-90deg)" : "rotate(90deg)" }} />
-				</div>
-			</button>
+			{buttonFirst ? null : buttonEl}
 		</>
 	);
 };

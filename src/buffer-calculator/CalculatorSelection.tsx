@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "../i18n";
 import { useCalculatorContext } from "./CalculatorContext";
 import { FlowLabels } from "./steps";
+import DebugPanel from "./DebugPanel";
 
 const CalculatorSelection = () => {
 	const { t } = useTranslation();
@@ -23,18 +24,17 @@ const CalculatorSelection = () => {
 					</button>
 				))}
 			</div>
-			<div>
-				<button
-					type="button"
-					className="bg-button py-2 px-3 text-white"
-					onClick={() => {
-						setFlow(localFlow);
-						nextStep();
-					}}
-				>
-					{t("steps.buttons.next-step")}
-				</button>
-			</div>
+			<button
+				type="button"
+				className="bg-button py-2 px-3 text-white"
+				onClick={() => {
+					setFlow(localFlow);
+					nextStep();
+				}}
+			>
+				{t("steps.buttons.next-step")}
+			</button>
+			<DebugPanel />
 		</div>
 	);
 };

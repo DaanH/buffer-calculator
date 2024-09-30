@@ -5,6 +5,7 @@ import Progress from "./Progress";
 import { stepProps, Steps } from "./steps";
 import { formatThousands, toNumber } from "./helpers";
 import Explanation from "./Explanation";
+import DebugPanel from "./DebugPanel";
 
 const Step = () => {
 	const { t } = useTranslation();
@@ -43,14 +44,7 @@ const Step = () => {
 			<button type="button" className="bg-button py-2 px-3 text-white" onClick={nextStep}>
 				{isLastStep ? t("steps.buttons.to-result") : t("steps.buttons.next-step")}
 			</button>
-			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
-				{Object.entries(vars).map(([key, value]) => (
-					<div key={key}>
-						<span className="inline-block  w-40">{key}</span>
-						{value}
-					</div>
-				))}
-			</div>
+			<DebugPanel />
 		</div>
 	);
 };

@@ -11,7 +11,7 @@ const ResultStep = () => {
 			<Progress />
 
 			<h3 className="text-xl font-bold mt-4">{t(`steps.${step}.title`)}</h3>
-			<Explanation text={t(`result.help.${flow}`)} />
+			<Explanation text={t(`result.help.${flow}`)} buttonFirst minimizedSize={0} />
 
 			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
 				{Object.entries(vars).map(([key, value]) => (
