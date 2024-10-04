@@ -7,7 +7,7 @@ const formatter = new Intl.NumberFormat("nl-NL", {
 });
 
 export const formatThousands = (val: number) => {
-	return val == undefined ? "€ " : formatter.format(val);
+	return val == undefined || Number.isNaN(val) ? "€ " : formatter.format(val);
 };
 
 export const toNumber = (str: string) => {
@@ -16,8 +16,10 @@ export const toNumber = (str: string) => {
 	return cleaned ? parseInt(cleaned, 10) : 0;
 };
 
-export const summary = (fn: () => number) => {
+export const summary = (fn: (() => number) | number) => {
+	if (fn == undefined) return "€ ";
 	try {
+		if (typeof fn === "number") return formatThousands(fn);
 		const result = fn();
 		return Number.isNaN(result) || result == undefined ? "€ 0" : formatThousands(result);
 	} catch (e) {

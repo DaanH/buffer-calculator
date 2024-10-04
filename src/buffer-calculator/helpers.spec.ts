@@ -48,4 +48,11 @@ describe("summary", () => {
 			})
 		).toBe("€ 0");
 	});
+	it("should return the number if it is a number", () => {
+		expect(summary(123)).toBe("€ 123");
+	});
+	it("should return empty if the number is not a number", () => {
+		expect(summary(NaN)).toBe("€ ");
+		expect(summary(undefined as unknown as number)).toBe("€ ");
+	});
 });
