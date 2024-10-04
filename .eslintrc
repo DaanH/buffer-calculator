@@ -1,10 +1,15 @@
 {
 	"root": true,
 	"parser": "@typescript-eslint/parser",
-	"extends": ["prettier"],
+	"extends": ["prettier", "plugin:react/recommended", "plugin:react-hooks/recommended"],
 	"rules": {
 		"react/react-in-jsx-scope": "off", // Suppress errors for missing 'import React' in files
-		"prettier/prettier": ["warn"], // Have prettier warn (not error) us about formatting issues
+		"prettier/prettier": [
+			"warn",
+			{
+				"singleQuote": true
+			}
+		], // Have prettier warn (not error) us about formatting issues
 		"linebreak-style": ["warn", "unix"], // Warn users to use LF, not CRLF
 		"no-console": [
 			"warn",
@@ -32,7 +37,7 @@
 				"pathGroupsExcludedImportTypes": ["react"]
 			}
 		],
-		"quotes": ["warn", "double"],
+		"quotes": ["warn", "single"],
 		"@typescript-eslint/array-type": ["warn", { "default": "array" }],
 		"@typescript-eslint/no-namespace": "off",
 		"react/button-has-type": ["warn", { "button": true, "submit": true, "reset": true }],
