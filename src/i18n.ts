@@ -2,62 +2,62 @@
 // (tip move them in a JSON file and import them)
 const translation: Record<string, string> = {
 	// tabs
-	"steps.all.change": "Aanpassen",
-	"steps.organization.name": "Onderwijsinstelling",
-	"steps.capital.name": "Eigen vermogen",
-	"steps.buildings.name": "Gebouwen",
-	"steps.assets.name": "Resterende MVA",
-	"steps.risk-buffer.name": "Risicobuffer",
+	'steps.all.change': 'Aanpassen',
+	'steps.organization.name': 'Onderwijsinstelling',
+	'steps.capital.name': 'Eigen vermogen',
+	'steps.buildings.name': 'Gebouwen',
+	'steps.assets.name': 'Resterende MVA',
+	'steps.risk-buffer.name': 'Risicobuffer',
 
 	// step content
-	"select-form.submit": "Ga verder",
-	"select-form.school": "School",
-	"select-form.partnership": "Samenwerkingsverband",
-	"select-form.question":
-		"Voor welk type onderwijsinstelling wilt u op bestuursniveau uw bovenmatig eigen vermogen uitrekenen?",
+	'select-form.submit': 'Ga verder',
+	'select-form.school': 'School',
+	'select-form.partnership': 'Samenwerkingsverband',
+	'select-form.question':
+		'Voor welk type onderwijsinstelling wilt u op bestuursniveau uw bovenmatig eigen vermogen uitrekenen?',
 
-	"steps.buttons.previous-step": "Terug",
-	"steps.buttons.next-step": "Ga verder",
-	"steps.buttons.to-result": "Bekijk de berekening",
+	'steps.buttons.previous-step': 'Terug',
+	'steps.buttons.next-step': 'Ga verder',
+	'steps.buttons.to-result': 'Bekijk de berekening',
 
-	"steps.capital.title": "Eigen vermogen",
-	"steps.capital.more-help": "Toon extra informatie over eigen vermogen",
-	"steps.capital.less-help": "Toon minder",
-	"steps.capital.help": `<p>Het <em>totaal aan eigen vermogen</em> kunt u aflezen van uw balans (onderdeel van uw jaarrekening). Het totale eigen vermogen kan naast een <em>publiek</em> deel (zoals de algemene reserve, de publieke bestemmingsreserve en het publieke bestemmingsfonds) ook bestaan uit een <em>privaat</em> deel (de private bestemmingsreserve en het private bestemmingsfonds). Dit onderscheid vindt u terug in de toelichting op de balans (een nadere uitsplitsing van de balansposten).</p>
+	'steps.capital.title': 'Eigen vermogen',
+	'steps.capital.more-help': 'Toon extra informatie over eigen vermogen',
+	'steps.capital.less-help': 'Toon minder',
+	'steps.capital.help': `<p>Het <em>totaal aan eigen vermogen</em> kunt u aflezen van uw balans (onderdeel van uw jaarrekening). Het totale eigen vermogen kan naast een <em>publiek</em> deel (zoals de algemene reserve, de publieke bestemmingsreserve en het publieke bestemmingsfonds) ook bestaan uit een <em>privaat</em> deel (de private bestemmingsreserve en het private bestemmingsfonds). Dit onderscheid vindt u terug in de toelichting op de balans (een nadere uitsplitsing van de balansposten).</p>
         <p>U vult eerst het totaal aan eigen vermogen in en daarna het private deel van het totale eigen vermogen.</p>
         <p>In de berekening van mogelijk bovenmatig eigen vermogen wordt uiteindelijk alleen rekening gehouden met het publieke deel.</p>`,
-	"steps.capital.labels.total": "Wat is het totaal aan eigen vermogen?",
-	"steps.capital.labels.private": "Hoeveel daarvan bedraagt het private deel?",
+	'steps.capital.labels.total': 'Wat is het totaal aan eigen vermogen?',
+	'steps.capital.labels.private': 'Hoeveel daarvan bedraagt het private deel?',
 
-	"steps.buildings.title": "Gebouwen",
-	"steps.buildings.more-help": "Toon extra informatie over gebouwen",
-	"steps.buildings.less-help": "Toon minder",
-	"steps.buildings.help": `<p>De <em>aanschafwaarde</em> van uw gebouwen, ook wel genoemd de historische kostprijs, vindt u terug in de toelichting op de balans. In de toelichting is onder materiële vaste activa een verloopoverzicht van al uw materiële vaste activa opgenomen. 
+	'steps.buildings.title': 'Gebouwen',
+	'steps.buildings.more-help': 'Toon extra informatie over gebouwen',
+	'steps.buildings.less-help': 'Toon minder',
+	'steps.buildings.help': `<p>De <em>aanschafwaarde</em> van uw gebouwen, ook wel genoemd de historische kostprijs, vindt u terug in de toelichting op de balans. In de toelichting is onder materiële vaste activa een verloopoverzicht van al uw materiële vaste activa opgenomen. 
         <p>Neem de aanschafwaarde aan het einde van de periode over in de rekenhulp.</p>
         <p><strong>Let op</strong> dat u het niet verwart met de <em>boekwaarde</em> van de gebouwen (die in een latere vraag aan de orde komt).</p>`,
-	"steps.buildings.labels.total": "Wat is de aanschafwaarde van uw gebouwen?",
+	'steps.buildings.labels.total': 'Wat is de aanschafwaarde van uw gebouwen?',
 
-	"steps.assets.title": "Resterende materiële vaste activa",
-	"steps.assets.more-help": "Toon extra informatie over resterende MVA",
-	"steps.assets.less-help": "Toon minder",
-	"steps.assets.help": `<p>De <em>boekwaarde</em> van uw materiële vaste activa (MVA) vindt u terug in de toelichting op de balans. Voorbeelden hiervan zijn gebouwen, machines, installaties en computers. In de toelichting is onder materiële vaste activa een verloopoverzicht van al uw materiële vaste activa opgenomen. Neem de boekwaarde aan het einde van de periode over in de rekenhulp.</p>
+	'steps.assets.title': 'Resterende materiële vaste activa',
+	'steps.assets.more-help': 'Toon extra informatie over resterende MVA',
+	'steps.assets.less-help': 'Toon minder',
+	'steps.assets.help': `<p>De <em>boekwaarde</em> van uw materiële vaste activa (MVA) vindt u terug in de toelichting op de balans. Voorbeelden hiervan zijn gebouwen, machines, installaties en computers. In de toelichting is onder materiële vaste activa een verloopoverzicht van al uw materiële vaste activa opgenomen. Neem de boekwaarde aan het einde van de periode over in de rekenhulp.</p>
         <p>U vult eerst de boekwaarde in van het totaal aan materiële vaste activa en daarna de boekwaarde van de gebouwen. </p>
         <p><strong>Let op</strong> dat u het niet verwart met de <em>aanschafwaarde</em> van de gebouwen (die u in een eerdere vraag invulde).</p>`,
-	"steps.assets.labels.total": "Wat is de boekwaarde van uw totale materiële vaste activa?",
-	"steps.assets.labels.current-building-value": "Wat is de boekwaarde van uw gebouwen?",
+	'steps.assets.labels.total': 'Wat is de boekwaarde van uw totale materiële vaste activa?',
+	'steps.assets.labels.current-building-value': 'Wat is de boekwaarde van uw gebouwen?',
 
-	"steps.risk-buffer.title": "Risicobuffer",
-	"steps.risk-buffer.more-help": "Toon extra informatie over risicobuffer",
-	"steps.risk-buffer.less-help": "Toon minder",
-	"steps.risk-buffer.help":
-		"<p>Het <em>totaal aan baten</em> kunt u aflezen van verschillende posten in uw staat van baten en lasten (onderdeel van uw jaarrekening). Tel bij totaal baten (de rijksbijdragen, overige overheidsbijdragen, collegegelden, in opdracht van derden, overige baten) de financiële baten op. Neem het totaal van deze baten over in de rekenhulp.</p>",
-	"steps.risk-buffer.labels.total": "Hoeveel bedraagt het totaal aan baten?",
+	'steps.risk-buffer.title': 'Risicobuffer',
+	'steps.risk-buffer.more-help': 'Toon extra informatie over risicobuffer',
+	'steps.risk-buffer.less-help': 'Toon minder',
+	'steps.risk-buffer.help':
+		'<p>Het <em>totaal aan baten</em> kunt u aflezen van verschillende posten in uw staat van baten en lasten (onderdeel van uw jaarrekening). Tel bij totaal baten (de rijksbijdragen, overige overheidsbijdragen, collegegelden, in opdracht van derden, overige baten) de financiële baten op. Neem het totaal van deze baten over in de rekenhulp.</p>',
+	'steps.risk-buffer.labels.total': 'Hoeveel bedraagt het totaal aan baten?',
 
 	// Results
-	"steps.result.title": "Berekening",
-	"steps.result.more-help": "Hoe komt deze berekening tot stand?",
-	"steps.result.less-help": "Sluiten",
-	"result.help.partnership": `
+	'steps.result.title': 'Berekening',
+	'steps.result.more-help': 'Hoe komt deze berekening tot stand?',
+	'steps.result.less-help': 'Sluiten',
+	'result.help.partnership': `
          <h4>Totaal eigen vermogen</h4>
          <p>Het bedrag dat u kunt aflezen van uw balans.<br>
          <strong>Bedrag:</strong> Het door u ingevulde bedrag bij Eigen vermogen.</p>
@@ -81,7 +81,7 @@ const translation: Record<string, string> = {
          <p>Het verhoudingsgetal tussen uw feitelijk en normatief eigen vermogen.<br />
          <strong>Bedrag:</strong> Feitelijk eigen vermogen / normatief eigen vermogen. Een getal boven de 1 duidt op mogelijk bovenmatig eigen vermogen.</p>
         `,
-	"result.help.school": `
+	'result.help.school': `
         <h4>Totaal eigen vermogen</h4>
         <p>Het bedrag dat u kunt aflezen van uw balans.<br />
         <strong>Bedrag:</strong> Het door u ingevulde bedrag bij Eigen vermogen.</p>
@@ -109,20 +109,20 @@ const translation: Record<string, string> = {
         <p>Het verhoudingsgetal tussen uw feitelijk en normatief eigen vermogen.<br />
         <strong>Bedrag:</strong> Feitelijk eigen vermogen / normatief eigen vermogen. Een getal boven de 1 duidt op mogelijk bovenmatig eigen vermogen.</p>
         `,
-	"result.note.excess":
-		"Uw feitelijk eigen vermogen ligt boven uw normatief eigen vermogen. Kijk samen met de andere interne belanghebbenden in uw onderwijsinstelling kritisch naar uw reserves en onderneem waar nodig actie.",
-	"result.note.no-excess":
-		"Uit de door u ingevulde gegevens blijkt niet dat er sprake is van mogelijk bovenmatig eigen vermogen.",
-	"result.download-title": "Download deze berekening als PDF",
-	"result.download-text": "Deze gegevens worden verder niet door ons opgeslagen.",
-	"result.restart": "Terug naar beginscherm",
-	"result.total": "Totaal eigen vermogen",
-	"result.private": "Privaat eigen vermogen",
-	"result.real": "Feitelijk eigen vermogen",
-	"result.normative": "Normatief eigen vermogen",
-	"result.excess": "Mogelijk bovenmatig eigen vermogen",
-	"result.ratio": "Ratio eigen vermogen:",
-	"result.disclaimer": "N.B. Aan de berekening zijn geen rechten te ontlenen."
+	'result.note.excess':
+		'Uw feitelijk eigen vermogen ligt boven uw normatief eigen vermogen. Kijk samen met de andere interne belanghebbenden in uw onderwijsinstelling kritisch naar uw reserves en onderneem waar nodig actie.',
+	'result.note.no-excess':
+		'Uit de door u ingevulde gegevens blijkt niet dat er sprake is van mogelijk bovenmatig eigen vermogen.',
+	'result.download-title': 'Download deze berekening als PDF',
+	'result.download-text': 'Deze gegevens worden verder niet door ons opgeslagen.',
+	'result.restart': 'Terug naar beginscherm',
+	'result.total': 'Totaal eigen vermogen',
+	'result.private': 'Privaat eigen vermogen',
+	'result.real': 'Feitelijk eigen vermogen',
+	'result.normative': 'Normatief eigen vermogen',
+	'result.excess': 'Mogelijk bovenmatig eigen vermogen',
+	'result.ratio': 'Ratio eigen vermogen',
+	'result.disclaimer': 'N.B. Aan de berekening zijn geen rechten te ontlenen.'
 };
 
 export const useTranslation = () => ({

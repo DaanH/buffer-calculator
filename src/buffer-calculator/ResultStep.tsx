@@ -2,69 +2,13 @@ import { useMemo } from 'react';
 import { useTranslation } from '../i18n';
 import { useCalculatorContext } from './CalculatorContext';
 import Explanation from './Explanation';
-import { summary } from './helpers';
 import Progress from './Progress';
-import { FlowLabels } from './steps';
-
-const getNormativeSingleSchool = (vars: Record<string, number>) => {
-	const {
-		// 'capital.total': capitalTotal,
-		// 'capital.private': capitalPrivate,
-		'buildings.total': buildingsTotal,
-		'assets.total': assetsTotal,
-		'assets.current-building-value': currentBuildingValue,
-		'risk-buffer.total': riskBufferTotal
-	} = vars;
-
-	return (
-		buildingsTotal * 0.5 * 1.27 + // 1.27 is the building cost index
-		assetsTotal - // boekwaarde totale MVA
-		currentBuildingValue + // - boekwaarde gebouwen
-		calculateBuffer(riskBufferTotal)
-	); // bufferpersentage * totaal aan baten
-};
-
-const calculateBuffer = (riskBuffer: number) => {
-	const userValue = riskBuffer;
-	const baseBuffer = 300000; // you may always have this 300k buffer, even with 0 income.
-	const minValue = 3000000;
-	const maxValue = 12000000;
-	const minimumPct = 5;
-	const maximumPct = 10;
-
-	if (userValue < minValue) {
-		return baseBuffer;
-	}
-
-	if (userValue > maxValue) {
-		return (minimumPct * userValue) / 100;
-	}
-
-	const log = Math.log10; // just to be clear: we use base 10.
-	const diffPct = maximumPct - minimumPct;
-	const diffLog = log(minValue) - log(maxValue);
-	const realDiffLog = log(userValue) - log(maxValue);
-
-	const bufferPct = minimumPct + (diffPct / diffLog) * realDiffLog;
-
-	return (bufferPct * userValue) / 100;
-};
+import { getResults } from './calculations';
 
 const ResultStep = () => {
 	const { step, vars, setStep, flow } = useCalculatorContext();
 	const { t } = useTranslation();
-	const results = useMemo(() => {
-		const { 'capital.total': capitalTotal, 'capital.private': capitalPrivate } = vars;
-		const normative = flow === FlowLabels.School ? getNormativeSingleSchool(vars) : 0;
-		return {
-			total: summary(() => capitalTotal),
-			private: summary(() => capitalPrivate),
-			real: summary(() => capitalTotal - capitalPrivate),
-			normative: summary(() => normative),
-			ratio: ((capitalTotal - capitalPrivate) / normative).toFixed(2),
-			excess: summary(() => Math.max(0, capitalTotal - capitalPrivate - normative))
-		};
-	}, [flow, vars]);
+	const results = useMemo(() => getResults(vars, flow), [flow, vars]);
 	return (
 		<div className="leading-5">
 			<Progress />
@@ -92,7 +36,7 @@ const ResultStep = () => {
 					<ResultLine label={t('result.excess')} value={results.excess} className="font-bold" />
 					<tr className="text-left italic h-20">
 						<td colSpan={2}>
-							{t('result.ratio')} : {results.ratio}
+							{t('result.ratio')}: {results.ratio}
 						</td>
 					</tr>
 				</table>
