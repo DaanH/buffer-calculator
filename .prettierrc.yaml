@@ -5,3 +5,5 @@ trailingComma: none
 endOfLine: lf
 useTabs: true
 singleQuote: true
+plugins:
+  - prettier-plugin-tailwindcss
