@@ -12,19 +12,19 @@ const CalculatorSelection = () => {
 	const [localFlow, setLocalFlow] = useState<FlowLabels | null>(null);
 	return (
 		<div>
-			<h3 className="text-xl font-bold mt-4">{t('select-form.question')}</h3>
-			<div className="flex gap-5 my-8 w-full items-stretch justify-stretch">
+			<h3 className="mt-4 text-xl font-bold">{t('select-form.question')}</h3>
+			<div className="my-8 flex w-full items-stretch justify-stretch gap-5">
 				{Object.values(FlowLabels).map((flowLabel) => (
 					<button
 						key={flowLabel}
-						className="bg-white p-8 w-1 flex-grow flex flex-col items-center gap-3"
+						className="flex w-1 flex-grow flex-col items-center gap-3 bg-white p-8"
 						type="button"
 						onClick={() => setLocalFlow(flowLabel)}
 					>
-						<div className="flex text-7xl fill-main items-center justify-center  ">
+						<div className="flex items-center justify-center fill-main text-7xl">
 							<StepIcon step={Steps.Organization} flow={flowLabel} />
 						</div>
-						<span className="font-bold text-sm">{t(`select-form.${flowLabel}`)}</span>
+						<span className="text-sm font-bold">{t(`select-form.${flowLabel}`)}</span>
 						<Radio checked={localFlow === flowLabel} />
 					</button>
 				))}
@@ -47,8 +47,8 @@ const CalculatorSelection = () => {
 };
 
 const Radio = ({ checked }: { checked: boolean }) => (
-	<div className="rounded-full border-2 border-button w-5 h-5 flex items-center justify-center ">
-		<div className={`rounded-full bg-button w-3 h-3 transition-transform ${checked ? 'scale-100' : 'scale-0'}`} />
+	<div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-button">
+		<div className={`h-3 w-3 rounded-full bg-button transition-transform ${checked ? 'scale-100' : 'scale-0'}`} />
 	</div>
 );
 export default CalculatorSelection;
