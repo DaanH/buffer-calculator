@@ -1,11 +1,11 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-type Props = { disabledHint: string } & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type Props = { disabledHint?: string } & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 const Button = ({ children, disabledHint, ...props }: Props) => (
 	<button
 		type="button"
-		className="group relative bg-button px-3 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50"
+		className="hover:bg-hover group relative bg-button px-3 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50"
 		{...props}
 	>
 		{disabledHint && (

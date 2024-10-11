@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="50px" viewBox="0 0 40 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>2069 invulformulier</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2069-invulformulier" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Group">
+                <path d="M38,0 L16.8286,0 C16.2979,0 15.7891,0.2109 15.4141,0.5859 L0.5859,15.4141 C0.2109,15.7891 0,16.2979 0,16.8286 L0,48 C0,49.0996 0.8999,50 2,50 L38,50 C39.1045,50 40,49.1045 40,48 L40,2 C40,0.8955 39.1045,0 38,0 Z M35,45 L5,45 L5,18.2918 L1.8516,17.3594 C1.5104,17.2504 1.6331,17 1.6331,17 L16,17 C16.5522,17 17,16.5522 17,16 L17,1.6341 C17,1.6341 17.2509,1.5245 17.3599,1.8651 L18.2915,5 L35,5 L35,45 Z" id="Shape"></path>
+                <rect id="Rectangle" x="21" y="14" width="10" height="3"></rect>
+                <rect id="Rectangle" x="16" y="24" width="15" height="3"></rect>
+                <rect id="Rectangle" x="9" y="24" width="5" height="3"></rect>
+                <rect id="Rectangle" x="16" y="30" width="15" height="3"></rect>
+                <rect id="Rectangle" x="9" y="30" width="5" height="3"></rect>
+                <rect id="Rectangle" x="9" y="36" width="5" height="3"></rect>
+                <rect id="Rectangle" x="16" y="36" width="15" height="3"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -53,12 +53,14 @@ const calculateBuffer = (riskBuffer: number) => {
 export const getResults = (vars: Record<string, number>, flow: FlowLabels) => {
 	const { 'capital.total': capitalTotal, 'capital.private': capitalPrivate } = vars;
 	const normative = flow === FlowLabels.School ? getNormativeSingleSchool(vars) : getNormativePartnership(vars);
+	const excess = Math.max(0, capitalTotal - capitalPrivate - normative);
 	return {
 		total: summary(() => capitalTotal),
 		private: summary(() => capitalPrivate),
 		real: summary(() => capitalTotal - capitalPrivate),
 		normative: summary(() => normative),
 		ratio: formatPercentage((capitalTotal - capitalPrivate) / normative),
-		excess: summary(() => Math.max(0, capitalTotal - capitalPrivate - normative))
+		excess: summary(() => excess),
+		excessNumber: excess
 	};
 };

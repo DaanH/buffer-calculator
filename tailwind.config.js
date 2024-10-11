@@ -24,7 +24,8 @@ module.exports = {
 				background: '#f3f3f3',
 
 				main: '#e17000',
-				button: '#01689b'
+				button: '#01689b',
+				hover: '#01496d'
 			}
 		}
 	},

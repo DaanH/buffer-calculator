@@ -8,7 +8,7 @@ import { Steps } from './steps';
 const BufferCalculator = () => {
 	return (
 		<CalculatorContextProvider>
-			<div className="bg-background p-8">
+			<div className="article bg-background p-8">
 				<PageSelector />
 			</div>
 		</CalculatorContextProvider>
