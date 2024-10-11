@@ -1,7 +1,7 @@
 //react context for keeping track of the current step and the amounts entered by the user in each step
 
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
-import { FlowLabels, flowSteps, Steps } from "./steps";
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { FlowLabels, flowSteps, Steps } from './steps';
 
 export type CalculatorContextType = {
 	flow: FlowLabels;
@@ -19,8 +19,8 @@ const calculatorContext = createContext<CalculatorContextType>({} as CalculatorC
 const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [flow, setFlow] = useState(FlowLabels.School);
-	const [vars, setVars] = useState<CalculatorContextType["vars"]>({});
-	const [touchedSteps, setTouchedSteps] = useState<CalculatorContextType["touchedSteps"]>({});
+	const [vars, setVars] = useState<CalculatorContextType['vars']>({});
+	const [touchedSteps, setTouchedSteps] = useState<CalculatorContextType['touchedSteps']>({});
 
 	const value = useMemo<CalculatorContextType>(
 		() => ({
@@ -35,7 +35,7 @@ const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 			},
 			flow,
 			setFlow: (flow: FlowLabels) => {
-				console.log("setting flow", flow);
+				console.log('setting flow', flow);
 				setFlow(flow);
 				setVars({});
 				setTouchedSteps({});
@@ -46,7 +46,7 @@ const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 		}),
 		[currentStep, flow, setFlow, vars, touchedSteps]
 	);
-	console.log("rendering context", touchedSteps);
+	console.log('rendering context', touchedSteps);
 	return <calculatorContext.Provider value={value}>{children}</calculatorContext.Provider>;
 };
 

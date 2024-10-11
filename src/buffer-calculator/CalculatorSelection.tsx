@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useTranslation } from '../i18n';
+import { StepIcon } from '../components/StepIcon';
+import Button from '../components/Button';
 import { useCalculatorContext } from './CalculatorContext';
-import { FlowLabels } from './steps';
 import DebugPanel from './DebugPanel';
+import { FlowLabels, Steps } from './steps';
 
 const CalculatorSelection = () => {
 	const { t } = useTranslation();
-	const { setFlow, flow, nextStep } = useCalculatorContext();
-	const [localFlow, setLocalFlow] = useState(flow);
+	const { setFlow, nextStep } = useCalculatorContext();
+	const [localFlow, setLocalFlow] = useState<FlowLabels | null>(null);
 	return (
 		<div>
-			<h2>{t('select-form.question')}</h2>
+			<h3 className="text-xl font-bold mt-4">{t('select-form.question')}</h3>
 			<div className="flex gap-5 my-8 w-full items-stretch justify-stretch">
 				{Object.values(FlowLabels).map((flowLabel) => (
 					<button
@@ -19,21 +21,26 @@ const CalculatorSelection = () => {
 						type="button"
 						onClick={() => setLocalFlow(flowLabel)}
 					>
-						{t(`select-form.${flowLabel}`)}
+						<div className="flex text-7xl fill-main items-center justify-center  ">
+							<StepIcon step={Steps.Organization} flow={flowLabel} />
+						</div>
+						<span className="font-bold text-sm">{t(`select-form.${flowLabel}`)}</span>
 						<Radio checked={localFlow === flowLabel} />
 					</button>
 				))}
 			</div>
-			<button
-				type="button"
-				className="bg-button py-2 px-3 text-white"
+			<Button
 				onClick={() => {
-					setFlow(localFlow);
-					nextStep();
+					if (localFlow) {
+						setFlow(localFlow);
+						nextStep();
+					}
 				}}
+				disabled={!localFlow}
+				disabledHint={t('select-form.submit-hint')}
 			>
 				{t('steps.buttons.next-step')}
-			</button>
+			</Button>
 			<DebugPanel />
 		</div>
 	);

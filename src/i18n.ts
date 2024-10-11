@@ -11,6 +11,7 @@ const translation: Record<string, string> = {
 
 	// step content
 	'select-form.submit': 'Ga verder',
+	'select-form.submit-hint': 'Selecteer een optie om verder te gaan',
 	'select-form.school': 'School',
 	'select-form.partnership': 'Samenwerkingsverband',
 	'select-form.question':
