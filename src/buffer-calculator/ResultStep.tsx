@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
+import DownloadButton from '../components/DownloadButton';
 import { useTranslation } from '../i18n';
 import { Play } from '../icons';
-import DownloadButton from '../components/DownloadButton';
 import { getResults } from './calculations';
 import { useCalculatorContext } from './CalculatorContext';
 import DebugPanel from './DebugPanel';
@@ -12,6 +12,8 @@ const ResultStep = () => {
 	const { step, vars, setStep, flow } = useCalculatorContext();
 	const { t } = useTranslation();
 	const results = useMemo(() => getResults(vars, flow), [flow, vars]);
+	const conclusion = results.excessNumber > 0 ? t('result.note.excess') : t('result.note.no-excess');
+
 	return (
 		<div className="flex flex-col gap-2">
 			<Progress />
@@ -20,28 +22,30 @@ const ResultStep = () => {
 
 			<div className="bg-white p-4 leading-normal">
 				<table className="mx-auto">
-					<ResultLine label={t('result.total')} value={results.total} />
-					<ResultLine label={t('result.private')} value={results.private} />
-					<SumLine />
+					<tbody>
+						<ResultLine label={t('result.total')} value={results.total} />
+						<ResultLine label={t('result.private')} value={results.private} />
+						<SumLine />
 
-					<ResultLine label={t('result.real')} value={results.real} />
-					<ResultLine label={t('result.normative')} value={results.normative} />
-					<SumLine />
+						<ResultLine label={t('result.real')} value={results.real} />
+						<ResultLine label={t('result.normative')} value={results.normative} />
+						<SumLine />
 
-					<ResultLine label={t('result.excess')} value={results.excess} className="font-bold" />
-					<tr className="h-20 text-left italic">
-						<td colSpan={2}>
-							{t('result.ratio')}: {results.ratio}
-						</td>
-					</tr>
+						<ResultLine label={t('result.excess')} value={results.excess} className="font-bold" />
+						<tr className="h-20 text-left italic">
+							<td colSpan={2}>
+								{t('result.ratio')}: {results.ratio}
+							</td>
+						</tr>
+					</tbody>
 				</table>
 				<div className="text-left text-xs">{t('result.disclaimer')}</div>
 			</div>
 			<div className="-mt-2 mb-8 bg-[#e6e6e6] px-4 pb-2">
 				<Explanation text={t(`result.help.${flow}`)} buttonFirst minimizedSize={0} />
 			</div>
-			<p>{results.excessNumber > 0 ? t('result.note.excess') : t('result.note.no-excess')}</p>
-			<DownloadButton />
+			<p>{conclusion}</p>
+			<DownloadButton results={results} conclusion={conclusion} />
 
 			<div className="flex items-center gap-2 text-sm text-button">
 				<div className="rotate-180">

@@ -50,7 +50,17 @@ const calculateBuffer = (riskBuffer: number) => {
 	return (bufferPct * userValue) / 100;
 };
 
-export const getResults = (vars: Record<string, number>, flow: FlowLabels) => {
+export interface IResults {
+	total: string;
+	private: string;
+	real: string;
+	normative: string;
+	ratio: string;
+	excess: string;
+	excessNumber: number;
+}
+
+export const getResults = (vars: Record<string, number>, flow: FlowLabels): IResults => {
 	const { 'capital.total': capitalTotal, 'capital.private': capitalPrivate } = vars;
 	const normative = flow === FlowLabels.School ? getNormativeSingleSchool(vars) : getNormativePartnership(vars);
 	const excess = Math.max(0, capitalTotal - capitalPrivate - normative);

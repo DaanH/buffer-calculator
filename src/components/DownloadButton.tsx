@@ -1,13 +1,26 @@
+import { IResults } from '../buffer-calculator/calculations';
+import { useCalculatorContext } from '../buffer-calculator/CalculatorContext';
+import { generatePdf, splitResultHelpTexts } from '../buffer-calculator/pdf-export/pdfHelpers';
 import { useTranslation } from '../i18n';
 import { File } from '../icons';
 
-const DownloadButton = () => {
+interface Props {
+	results: IResults;
+	conclusion: string;
+}
+
+const DownloadButton = ({ results, conclusion }: Props) => {
 	const { t } = useTranslation();
+	const { flow } = useCalculatorContext();
+	const help = t(`result.help.${flow}`);
+	const helpTexts = splitResultHelpTexts(help);
+
+	console.log('helpTexts', help, helpTexts);
 	return (
 		<button
 			type="button"
-			className="hover:bg-hover group relative bg-button py-5 pl-20 text-left text-white"
-			onClick={() => {}}
+			className="group relative bg-button py-5 pl-20 text-left text-white hover:bg-hover"
+			onClick={() => generatePdf(t, { title: t('steps.result.title'), results, conclusion, helpTexts })}
 		>
 			<File className="absolute left-5 top-1/2 h-10 w-10 -translate-y-1/2 fill-white" />
 			<div className="text-xl font-bold group-hover:underline">{t('result.download-title')}</div>
