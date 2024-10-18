@@ -139,5 +139,17 @@ export const generatePdf = async (t: (key: string) => string, { title, results, 
 		}
 	};
 
-	pdfMake.createPdf(documentDefinition, undefined, fonts).download('custom-font-sample.pdf');
+	const today = new Date();
+	const filename = createFilename(title, today);
+
+	pdfMake.createPdf(documentDefinition, undefined, fonts).download(filename);
+};
+
+export const createFilename = (title: string, today: Date) => {
+	const isoDate = today.toISOString();
+	const year = isoDate.slice(0, 4);
+	const month = isoDate.slice(5, 7);
+	const day = isoDate.slice(8, 10);
+	const filename = `${title}_${day}_${month}_${year}.pdf`;
+	return filename;
 };

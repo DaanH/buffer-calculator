@@ -26,7 +26,6 @@ const StepComponents: Record<Steps, FC> = {
 
 const PageSelector = () => {
 	const { step } = useCalculatorContext();
-
 	const StepComponent = StepComponents[step];
 	return <StepComponent />;
 };

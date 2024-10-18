@@ -1,6 +1,6 @@
-import { IResults } from '../buffer-calculator/calculations';
 import { useCalculatorContext } from '../buffer-calculator/CalculatorContext';
 import { generatePdf, splitResultHelpTexts } from '../buffer-calculator/pdf-export/pdfHelpers';
+import { IResults } from '../buffer-calculator/types';
 import { useTranslation } from '../i18n';
 import { File } from '../icons';
 
@@ -15,7 +15,6 @@ const DownloadButton = ({ results, conclusion }: Props) => {
 	const help = t(`result.help.${flow}`);
 	const helpTexts = splitResultHelpTexts(help);
 
-	console.log('helpTexts', help, helpTexts);
 	return (
 		<button
 			type="button"

@@ -2,16 +2,16 @@ import { useCalculatorContext } from './CalculatorContext';
 
 const DebugPanel = () => {
 	const { vars, touchedSteps } = useCalculatorContext();
-	const isLocalhost = window.location.hostname === 'localhost';
+	const isLocalhost = false; //window.location.hostname === 'localhost';
 	return (
 		isLocalhost && (
-			<div className="font-mono text-xs p-2 my-2 border-2 rounded border-amber-300">
+			<div className="my-2 rounded border-2 border-amber-300 p-2 font-mono text-xs">
 				{JSON.stringify(touchedSteps, null, 2)}
 
 				<hr />
 				{Object.entries(vars).map(([key, value]) => (
 					<div key={key}>
-						<span className="inline-block  w-40">{key}</span>
+						<span className="inline-block w-40">{key}</span>
 						{value}
 					</div>
 				))}

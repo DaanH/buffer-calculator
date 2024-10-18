@@ -48,7 +48,11 @@ const CalculatorSelection = () => {
 
 const Radio = ({ checked }: { checked: boolean }) => (
 	<div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-button">
-		<div className={`h-3 w-3 rounded-full bg-button transition-transform ${checked ? 'scale-100' : 'scale-0'}`} />
+		<div
+			className={`h-3 w-3 rounded-full bg-button transition-transform duration-100 ${
+				checked ? 'scale-100' : 'scale-0'
+			}`}
+		/>
 	</div>
 );
 export default CalculatorSelection;

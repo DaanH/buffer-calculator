@@ -96,7 +96,7 @@ const translation: Record<string, string> = {
         <strong>Bedrag:</strong> Totaal eigen vermogen -/- privaat vermogen.</p>
 
         <h4>Normatief eigen vermogen</h4>
-        <p>Het vermogen dat u redelijkerwijs nodig hebt om bezittingen te financieren en risico’s op te vangen).<br />
+        <p>Het vermogen dat u redelijkerwijs nodig hebt om bezittingen te financieren en risico’s op te vangen.<br />
         De logaritmische interpolatie vindt plaats volgens de volgende formule: 0,05 + (0,1-0,05) / (log(3.000.000) -log(12.000.000)) * (log(<em>a</em>) - log(12.000.000).
         Daarbij is <em>a</em> het bedrag van uw totaal baten + financiële baten.<br />
         <strong>Bedrag:</strong> (0,5 * aanschafwaarde gebouwen * bouwkostenindex) + (boekwaarde resterende materiële vaste activa) + (percentage volgens oplopende schaal * alle baten).

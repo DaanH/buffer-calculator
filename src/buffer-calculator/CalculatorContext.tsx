@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { FlowLabels, flowSteps, Steps } from './steps';
+import { IVariables } from './types';
 
 export type CalculatorContextType = {
 	flow: FlowLabels;
@@ -10,8 +11,8 @@ export type CalculatorContextType = {
 	touchedSteps: Partial<Record<Steps, boolean>>;
 	nextStep: () => void;
 	setStep: (index: number) => void;
-	setVar: (key: string, value: number) => void;
-	vars: Record<string, number>;
+	setVar: (key: keyof IVariables, value: number) => void;
+	vars: IVariables;
 };
 
 const calculatorContext = createContext<CalculatorContextType>({} as CalculatorContextType);
@@ -19,7 +20,7 @@ const calculatorContext = createContext<CalculatorContextType>({} as CalculatorC
 const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [flow, setFlow] = useState(FlowLabels.School);
-	const [vars, setVars] = useState<CalculatorContextType['vars']>({});
+	const [vars, setVars] = useState<CalculatorContextType['vars']>({} as IVariables);
 	const [touchedSteps, setTouchedSteps] = useState<CalculatorContextType['touchedSteps']>({});
 	const setStep = useCallback(
 		(index: number) => {
@@ -40,14 +41,14 @@ const CalculatorContextProvider = ({ children }: { children: ReactNode }) => {
 			flow,
 			setFlow: (flow: FlowLabels) => {
 				setFlow(flow);
-				setVars({});
+				setVars({} as IVariables);
 				setTouchedSteps({});
 			},
 			setStep,
-			setVar: (key: string, value: number) => setVars((prev) => ({ ...prev, [key]: value })),
+			setVar: (key: keyof IVariables, value: number) => setVars((prev) => ({ ...prev, [key]: value })),
 			vars
 		}),
-		[currentStep, flow, setFlow, vars, touchedSteps]
+		[flow, currentStep, touchedSteps, setStep, vars]
 	);
 	return <calculatorContext.Provider value={value}>{children}</calculatorContext.Provider>;
 };

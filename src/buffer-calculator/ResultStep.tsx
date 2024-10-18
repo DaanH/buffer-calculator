@@ -2,16 +2,24 @@ import { useMemo } from 'react';
 import DownloadButton from '../components/DownloadButton';
 import { useTranslation } from '../i18n';
 import { Play } from '../icons';
+import useAsset from '../hooks/useAsset';
 import { getResults } from './calculations';
 import { useCalculatorContext } from './CalculatorContext';
 import DebugPanel from './DebugPanel';
 import Explanation from './Explanation';
 import Progress from './Progress';
+import { IConstants, IResults } from './types';
+
+const parseConstants = (source: string) => JSON.parse(source) as IConstants;
 
 const ResultStep = () => {
 	const { step, vars, setStep, flow } = useCalculatorContext();
 	const { t } = useTranslation();
-	const results = useMemo(() => getResults(vars, flow), [flow, vars]);
+	const constants = useAsset<IConstants>('constants.json', parseConstants);
+	const results = useMemo<IResults>(
+		() => (constants ? getResults(vars, flow, constants) : ({} as IResults)),
+		[constants, flow, vars]
+	);
 	const conclusion = results.excessNumber > 0 ? t('result.note.excess') : t('result.note.no-excess');
 
 	return (
