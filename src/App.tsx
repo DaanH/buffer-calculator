@@ -1,13 +1,14 @@
-import { useNav } from "./hooks/useNav";
+import { useNav } from './hooks/useNav';
 
-import Navigation from "./components/Navigation";
-import Home from "./pages/Home";
-import ExternalData from "./pages/ExternalData";
-import Typography from "./pages/Typography";
-import FontsAndIcons from "./pages/FontsAndIcons";
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import ExternalData from './pages/ExternalData';
+import Typography from './pages/Typography';
+import FontsAndIcons from './pages/FontsAndIcons';
 
-import "./styles/app.scss";
-import BufferCalculator from "./buffer-calculator/BufferCalculator";
+import BufferCalculator from './buffer-calculator/BufferCalculator';
+
+const { DEV } = import.meta.env;
 
 interface PagesMap {
 	[key: string]: () => JSX.Element;
@@ -26,8 +27,14 @@ const App = () => {
 	const ActivePage = pages[activePage];
 	return (
 		<div className="web-app">
-			<Navigation />
-			<ActivePage />
+			{DEV ? (
+				<>
+					<Navigation />
+					<ActivePage />
+				</>
+			) : (
+				<BufferCalculator />
+			)}
 		</div>
 	);
 };
