@@ -1,3 +1,8 @@
 {
-	"buffer": 13000
+	"factorShool": 0.635,
+	"basisbuffer": 300000,
+	"minwaarde": 3000000,
+	"maxwaarde": 12000000,
+	"minpercentage": 5,
+	"maxpercentage": 10
 }
